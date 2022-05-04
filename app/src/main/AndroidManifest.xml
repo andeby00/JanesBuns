@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JanesBuns">
         <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.AddBunActivity"
             android:exported="false" />
         <activity
