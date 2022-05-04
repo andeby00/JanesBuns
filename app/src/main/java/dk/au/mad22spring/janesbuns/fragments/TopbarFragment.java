@@ -1,5 +1,6 @@
 package dk.au.mad22spring.janesbuns.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import dk.au.mad22spring.janesbuns.R;
+import dk.au.mad22spring.janesbuns.activities.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,15 +19,10 @@ import dk.au.mad22spring.janesbuns.R;
  * create an instance of this fragment.
  */
 public class TopbarFragment extends Fragment {
+    Button button;
+    private static final String ARG_PARAM1 = "";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String btnType;
 
     public TopbarFragment() {
         // Required empty public constructor
@@ -34,26 +32,27 @@ public class TopbarFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param btnType Parameter 1.
      * @return A new instance of fragment TopbarFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static TopbarFragment newInstance(String param1, String param2) {
+
+    public static TopbarFragment newInstance(String btnType) {
         TopbarFragment fragment = new TopbarFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, btnType);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public static TopbarFragment newInstance() {
+        return new TopbarFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            btnType = getArguments().getString(ARG_PARAM1);
         }
     }
 
@@ -61,6 +60,15 @@ public class TopbarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_topbar, container, false);
+        View v = inflater.inflate(R.layout.fragment_topbar, container, false);
+        button = v.findViewById(R.id.btnTopbarButton);
+        if(btnType == "LOGIN") {
+            button.setOnClickListener(this::onClickLogin);
+        }
+        return v;
+    }
+
+    private void onClickLogin(View view) {
+        startActivity(new Intent(getActivity().getApplicationContext(), LoginActivity.class));
     }
 }

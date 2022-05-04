@@ -134,11 +134,11 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()) {
                         UserModel user = new UserModel(fullName, phone, email, address, city, postalCode, false);
-
+                        String uid = task.getResult().getUser().getUid();
                         db.collection("users")
-                                .add(user)
+                                .document(uid).set(user)
                                 .addOnSuccessListener(documentReference -> {
-                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                    Log.d(TAG, "DocumentSnapshot added with ID: " + uid);
                                     Toast.makeText(RegisterActivity.this, "User has been registered", Toast.LENGTH_LONG).show();
                                     finish();
                                 })
@@ -160,6 +160,7 @@ public class RegisterActivity extends AppCompatActivity {
                         });*/
                     }
                     else {
+                        Log.w(TAG, "registerUser: " + task.getException());
                         Toast.makeText(RegisterActivity.this, "User has failed to register", Toast.LENGTH_LONG).show();
                     }
                 });
