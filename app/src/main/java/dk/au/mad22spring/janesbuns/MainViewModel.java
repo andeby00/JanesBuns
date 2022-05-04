@@ -1,7 +1,5 @@
 package dk.au.mad22spring.janesbuns;
 
-import android.app.Application;
-
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,8 +7,10 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import dk.au.mad22spring.janesbuns.models.CreamBun;
+import dk.au.mad22spring.janesbuns.models.User;
 
 public class MainViewModel extends ViewModel {
     MutableLiveData<List<CreamBun>> creamBuns;
@@ -36,7 +36,5 @@ public class MainViewModel extends ViewModel {
         return creamBuns;
     }
 
-//    public void updateDrink(CreamBun drink) {
-//        repo.updateDrink(drink);
-//    }
+    public Optional<User> getCurrentUser () { return repo.getCurrentUser(); }
 }

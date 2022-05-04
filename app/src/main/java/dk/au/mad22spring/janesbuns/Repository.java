@@ -8,26 +8,29 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Optional;
 
 import dk.au.mad22spring.janesbuns.models.CreamBun;
+import dk.au.mad22spring.janesbuns.models.User;
 
 public class Repository {
-    private static final String TAG = "Repository";
+    static final String TAG = "Repository";
 
     //private final ExecutorService executor;
     //private final Api api;
     FirebaseFirestore db;
-    private static Repository instance;
+    FirebaseAuth mAuth;
+    static Repository instance;
 
-    private MutableLiveData<List<CreamBun>> creamBuns;
+    MutableLiveData<List<CreamBun>> creamBuns;
+    Optional<User> currentUser = Optional.empty();
 
     private Repository() {
         //executor = Executors.newSingleThreadExecutor();
@@ -35,6 +38,10 @@ public class Repository {
         creamBuns = new MutableLiveData<>(new ArrayList<>());
 
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+        String tempUid = mAuth.getCurrentUser().getUid();
+        if (!tempUid.isEmpty()) { updateCurrentUser(tempUid); }
 
         db.collection("creamBuns")
                 .get()
@@ -55,6 +62,7 @@ public class Repository {
                         }
                     }
                 });
+
     }
 
     public static Repository getInstance() {
@@ -65,4 +73,15 @@ public class Repository {
     }
 
     public LiveData<List<CreamBun>> getCreamBuns() { return creamBuns; }
+
+    public void updateCurrentUser(String uid) {
+        db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
+            currentUser = Optional.ofNullable(documentSnapshot.toObject(User.class));
+        });
+        Log.d(TAG, "updateCurrentUser: ");
+    }
+
+    public Optional<User> getCurrentUser() {
+        return currentUser;
+    }
 }

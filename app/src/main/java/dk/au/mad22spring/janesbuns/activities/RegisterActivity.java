@@ -1,6 +1,5 @@
 package dk.au.mad22spring.janesbuns.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,15 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import dk.au.mad22spring.janesbuns.R;
-import dk.au.mad22spring.janesbuns.models.UserModel;
+import dk.au.mad22spring.janesbuns.models.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -133,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()) {
-                        UserModel user = new UserModel(fullName, phone, email, address, city, postalCode, false);
+                        User user = new User(fullName, phone, email, address, city, postalCode, false);
                         String uid = task.getResult().getUser().getUid();
                         db.collection("users")
                                 .document(uid).set(user)

@@ -1,13 +1,13 @@
 package dk.au.mad22spring.janesbuns.models;
 
-public class UserModel {
+public class User {
     public String fullName, phone, email, address, city;
     public int postalCode;
     public boolean isAdmin;
 
-    public UserModel() {}
+    public User() {}
 
-    public UserModel(String fullName, String phone, String email, String address, String city, int postalCode, boolean isAdmin) {
+    public User(String fullName, String phone, String email, String address, String city, int postalCode, boolean isAdmin) {
         this.fullName = fullName;
         this.phone = phone;
         this.email = email;

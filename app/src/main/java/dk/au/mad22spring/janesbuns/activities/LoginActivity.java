@@ -1,6 +1,7 @@
 package dk.au.mad22spring.janesbuns.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +14,14 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import dk.au.mad22spring.janesbuns.LoginViewModel;
+import dk.au.mad22spring.janesbuns.MainViewModel;
 import dk.au.mad22spring.janesbuns.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    LoginViewModel vm;
 
     //Widgets
     private TextView textViewRegister;
@@ -40,6 +44,10 @@ public class LoginActivity extends AppCompatActivity {
         //Onclick listeners
         textViewRegister.setOnClickListener(this::onClickRegister);
         buttonLogin.setOnClickListener(this::onClickLogin);
+
+
+        vm = new ViewModelProvider(this).get(LoginViewModel.class);
+        vm.initializeVM();
     }
 
     private void onClickRegister(View view) {
@@ -76,7 +84,9 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()) {
                         Toast.makeText(this, "Successfully logged in as " + email, Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(this, ProfileActivity.class));
+                        vm.updateCurrentUser(task.getResult().getUser().getUid());
+                        //startActivity(new Intent(this, ProfileActivity.class));
+                        finish();
                     }
                     else {
                         Toast.makeText(this, "User has failed to login", Toast.LENGTH_LONG).show();

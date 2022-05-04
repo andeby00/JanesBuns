@@ -25,8 +25,9 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
         this.listener = listener;
     }
 
-    public void updateCreamBunList(List<CreamBun> list) {
+    public void updateCreamBunList(List<CreamBun> list, boolean isAdmin) {
         creamBunList = list;
+        //if(isAdmin) creamBunList.add(new CreamBun())
         notifyDataSetChanged();
     }
 
