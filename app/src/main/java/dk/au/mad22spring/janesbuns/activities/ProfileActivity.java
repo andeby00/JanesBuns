@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseFirestore db;
 
     private Button buttonLogout;
-    private TextView textViewFullName, textViewEmail, textViewPhone;
+    private TextView textViewFullName, textViewEmail, textViewPhone, textViewAddress, textViewPostalCode, textViewCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,9 @@ public class ProfileActivity extends AppCompatActivity {
         textViewFullName = findViewById(R.id.fullNameTextViewProfile);
         textViewEmail = findViewById(R.id.emailTextViewProfile);
         textViewPhone = findViewById(R.id.phoneTextViewProfile);
+        textViewAddress = findViewById(R.id.addressTextViewProfile);
+        textViewPostalCode = findViewById(R.id.postalCodeTextViewProfile);
+        textViewCity = findViewById(R.id.cityTextViewProfile);
 
         setDetails();
 
@@ -66,10 +69,16 @@ public class ProfileActivity extends AppCompatActivity {
                 String fullName = currentUser.email;
                 String email = currentUser.email;
                 String phone = currentUser.phone;
+                String address = currentUser.address;
+                int postalCode = currentUser.postalCode;
+                String city = currentUser.city;
 
                 textViewFullName.setText(fullName);
                 textViewEmail.setText(email);
                 textViewPhone.setText(phone);
+                textViewAddress.setText(address);
+                textViewPostalCode.setText(postalCode);
+                textViewCity.setText(city);
             }
         });
         /*

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activities.ProfileActivity">
 
+    <TextView
+        android:id="@+id/addressTextViewProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTextViewProfile"
+        tools:text="Address" />
+
     <Button
         android:id="@+id/logoutButtonProfile"
         android:layout_width="wrap_content"
@@ -20,8 +30,8 @@
         android:id="@+id/fullNameTextViewProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Fullname" />
@@ -30,8 +40,8 @@
         android:id="@+id/emailTextViewProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullNameTextViewProfile"
         tools:text="Email adress" />
@@ -40,10 +50,30 @@
         android:id="@+id/phoneTextViewProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailTextViewProfile"
         tools:text="Phone" />
+
+    <TextView
+        android:id="@+id/postalCodeTextViewProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:text="Postal  Code"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressTextViewProfile" />
+
+    <TextView
+        android:id="@+id/cityTextViewProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:text="City"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postalCodeTextViewProfile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
