@@ -1,25 +1,16 @@
 package dk.au.mad22spring.janesbuns.activities;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.RequiresApi;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.util.Optional;
-import java.util.concurrent.BlockingDeque;
 
 import dk.au.mad22spring.janesbuns.CreamBunAdapter;
 import dk.au.mad22spring.janesbuns.MainViewModel;
@@ -54,18 +45,11 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
         butt = findViewById(R.id.button);
         butt.setOnClickListener(view -> startActivity(new Intent(this, AddBunActivity.class)));
 
+        vm.getCurrentUser().observe(this, this::initTopbar);
         vm.getCreamBuns().observe(this, creamBuns -> creamBunAdapter.updateCreamBunList(creamBuns, true));
-        vm.getCurrentUser().observe(this, creamBuns -> initTopbar());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initTopbar();
-    }
-
-    private void initTopbar() {
-        User currentUser = vm.getCurrentUser().getValue();
+    private void initTopbar(User currentUser) {
 
         Log.d(TAG, "initTopbar: " + currentUser);
         if(currentUser == null) {
@@ -93,6 +77,10 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
     @Override
     public void onCreamBunClicked(int index) {
         Log.d(TAG, "onCreamBunClicked: " + index);
+
+        if (index == -1) {
+            startActivity(new Intent(this, AddBunActivity.class));
+        }
 //        Intent intent = new Intent(this, DetailsActivity.class);
 //        Bundle bundle = new Bundle();
 //        bundle.putSerializable("Drink", vm.getDrinks().getValue().get(index));

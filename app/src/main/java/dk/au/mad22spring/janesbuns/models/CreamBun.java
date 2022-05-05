@@ -13,6 +13,13 @@ public class CreamBun {
         this.uri = uri;
     }
 
+    public CreamBun(String uri) {
+        this.name = "";
+        this.amount = null;
+        this.price = null;
+        this.uri = uri;
+    }
+
     public CreamBun() {
         this.name = "";
         this.amount = 0;

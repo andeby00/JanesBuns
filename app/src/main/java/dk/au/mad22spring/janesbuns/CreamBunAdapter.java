@@ -34,6 +34,7 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
 
     public void updateCreamBunList(List<CreamBun> list, boolean isAdmin) {
         creamBunList = list;
+        creamBunList.add(new CreamBun("plus_sign.png"));
         notifyDataSetChanged();
     }
 
@@ -79,7 +80,11 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
 
         @Override
         public void onClick(View view) {
-            listener.onCreamBunClicked(getAdapterPosition());
+            int i = getBindingAdapterPosition();
+            if(i == creamBunList.size() - 1)
+                listener.onCreamBunClicked(-1);
+
+            listener.onCreamBunClicked(i);
         }
     }
 }
