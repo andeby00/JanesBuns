@@ -7,20 +7,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+
+import java.util.UUID;
 
 import dk.au.mad22spring.janesbuns.R;
 import dk.au.mad22spring.janesbuns.models.CreamBun;
@@ -82,29 +78,21 @@ public class AddBunActivity extends AppCompatActivity {
 
     private void addBun() {
 
-        StorageReference storageReference = storageRef.child("CreamBuns/test3.jpg");
+        StorageReference storageReference = storageRef.child("CreamBuns/" + UUID.randomUUID() + ".jpg");
 
         storageReference.putFile(imgUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.d(TAG, "onSuccess: " + taskSnapshot.getMetadata().getPath());
-                        CreamBun creamBun = new CreamBun(
-                                name.getText().toString(),
-                                Integer.parseInt(amount.getText().toString()),
-                                Double.parseDouble(price.getText().toString()),
-                                taskSnapshot.getMetadata().getPath()
-                        );
+                .addOnSuccessListener(task -> {
+                    Log.d(TAG, "onSuccess: " + task.getMetadata().getPath());
+                    CreamBun creamBun = new CreamBun(
+                            name.getText().toString(),
+                            Integer.parseInt(amount.getText().toString()),
+                            Double.parseDouble(price.getText().toString()),
+                            task.getMetadata().getPath()
+                    );
 
-                        db.collection("creamBuns").add(creamBun);
-                    }
+                    db.collection("creamBuns").add(creamBun);
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Log.d(TAG, "onFailure: image");
-                    }
-                });
+                .addOnFailureListener(exception -> Log.d(TAG, "onFailure: image"));
 
         finish();
     }
