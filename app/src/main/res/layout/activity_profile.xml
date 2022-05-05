@@ -20,11 +20,11 @@
         android:id="@+id/logoutButtonProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneTextViewProfile" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/fullNameTextViewProfile"
@@ -75,5 +75,15 @@
         android:text="City"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postalCodeTextViewProfile" />
+
+    <Button
+        android:id="@+id/addBunButtonProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Add bun"
+        app:layout_constraintBottom_toTopOf="@+id/logoutButtonProfile"
+        app:layout_constraintEnd_toEndOf="@+id/logoutButtonProfile"
+        app:layout_constraintStart_toStartOf="@+id/logoutButtonProfile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

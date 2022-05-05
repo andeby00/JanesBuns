@@ -30,7 +30,7 @@ public class Repository {
     static Repository instance;
 
     MutableLiveData<List<CreamBun>> creamBuns;
-    Optional<User> currentUser = Optional.empty();
+    User currentUser = null;
 
     private Repository() {
         //executor = Executors.newSingleThreadExecutor();
@@ -40,8 +40,12 @@ public class Repository {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        String tempUid = mAuth.getCurrentUser().getUid();
-        if (!tempUid.isEmpty()) { updateCurrentUser(tempUid); }
+        String tempUid = null;
+
+        if (mAuth.getCurrentUser() != null) {
+            tempUid = mAuth.getCurrentUser().getUid();
+            updateCurrentUser(tempUid);
+        }
 
         db.collection("creamBuns")
                 .get()
@@ -76,12 +80,12 @@ public class Repository {
 
     public void updateCurrentUser(String uid) {
         db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
-            currentUser = Optional.ofNullable(documentSnapshot.toObject(User.class));
+            currentUser = documentSnapshot.toObject(User.class);
         });
         Log.d(TAG, "updateCurrentUser: ");
     }
 
-    public Optional<User> getCurrentUser() {
+    public User getCurrentUser() {
         return currentUser;
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import dk.au.mad22spring.janesbuns.R;
 import dk.au.mad22spring.janesbuns.activities.LoginActivity;
+import dk.au.mad22spring.janesbuns.activities.ProfileActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,14 +68,18 @@ public class TopbarFragment extends Fragment {
             button.setText("Login");
         }
         if(btnType == "ORDERS") {
-            button.setOnClickListener(this::onClickLogin);
-            button.setText("Orders");
+            button.setOnClickListener(this::onClickAccount);
+            button.setText("Account");
         }
         if(btnType == "ACCOUNT") {
-            button.setOnClickListener(this::onClickLogin);
+            button.setOnClickListener(this::onClickAccount);
             button.setText("Account");
         }
         return v;
+    }
+
+    private void onClickAccount(View view) {
+        startActivity(new Intent(getActivity().getApplicationContext(), ProfileActivity.class));
     }
 
     private void onClickLogin(View view) {

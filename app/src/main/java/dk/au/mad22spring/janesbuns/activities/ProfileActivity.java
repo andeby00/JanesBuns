@@ -1,6 +1,7 @@
 package dk.au.mad22spring.janesbuns.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,10 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Optional;
+
+import dk.au.mad22spring.janesbuns.LoginViewModel;
+import dk.au.mad22spring.janesbuns.ProfileViewModel;
 import dk.au.mad22spring.janesbuns.R;
 import dk.au.mad22spring.janesbuns.models.User;
 
@@ -20,7 +25,9 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
 
-    private Button buttonLogout;
+    ProfileViewModel vm;
+
+    private Button buttonLogout, buttonAddBun;
     private TextView textViewFullName, textViewEmail, textViewPhone, textViewAddress, textViewPostalCode, textViewCity;
 
     @Override
@@ -31,7 +38,11 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        vm = new ViewModelProvider(this).get(ProfileViewModel.class);
+        vm.initializeVM();
+
         buttonLogout = findViewById(R.id.logoutButtonProfile);
+        buttonAddBun = findViewById(R.id.addBunButtonProfile);
         textViewFullName = findViewById(R.id.fullNameTextViewProfile);
         textViewEmail = findViewById(R.id.emailTextViewProfile);
         textViewPhone = findViewById(R.id.phoneTextViewProfile);
@@ -40,6 +51,17 @@ public class ProfileActivity extends AppCompatActivity {
         textViewCity = findViewById(R.id.cityTextViewProfile);
 
         setDetails();
+
+        /*User currentUser = vm.getCurrentUser();
+
+        if(currentUser != null) {
+            if(currentUser.isAdmin) {
+                buttonAddBun.setVisibility(View.VISIBLE);
+
+                buttonAddBun.setOnClickListener(this::onClickAddBun);
+            }
+            else buttonAddBun.setVisibility(View.GONE);
+        }*/
 
         buttonLogout.setOnClickListener(this::onClickLogout);
 
@@ -63,10 +85,14 @@ public class ProfileActivity extends AppCompatActivity {
                 textViewEmail.setText(email);
                 textViewPhone.setText(phone);
                 textViewAddress.setText(address);
-                textViewPostalCode.setText(postalCode);
+                textViewPostalCode.setText(String.valueOf(postalCode));
                 textViewCity.setText(city);
             }
         });
+    }
+
+    private void onClickAddBun(View view) {
+        startActivity(new Intent(this, AddBunActivity.class));
     }
 
     private void onClickLogout(View view) {

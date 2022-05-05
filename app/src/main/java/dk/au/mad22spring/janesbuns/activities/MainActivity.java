@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
         vm.initializeVM(this);
 
         mAuth = FirebaseAuth.getInstance();
-        Log.d(TAG, "onCreate: " + mAuth.getCurrentUser().getEmail());
+        //Log.d(TAG, "onCreate: " + mAuth.getCurrentUser().getEmail());
 
         creamBunAdapter = new CreamBunAdapter(this);
         rcvCreamBuns = findViewById(R.id.rcvMainCreamBuns);
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
 
         vm.getCreamBuns().observe(this, creamBuns -> creamBunAdapter.updateCreamBunList(creamBuns, true));
 
-        if (vm.getCurrentUser().isPresent())
-            Log.d(TAG, "onCreate: " + vm.getCurrentUser().get().fullName);
+        if (vm.getCurrentUser() != null)
+            Log.d(TAG, "onCreate: " + vm.getCurrentUser().fullName);
             //Toast.makeText(this, vm.getCurrentUser().get().fullName, Toast.LENGTH_LONG).show();
     }
 
@@ -72,17 +72,18 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
     }
 
     private void initTopbar() {
-        Optional<User> currentUser = vm.getCurrentUser();
+        User currentUser = vm.getCurrentUser();
 
         Log.d(TAG, "initTopbar: " + currentUser);
-        if(!currentUser.isPresent()) {
+        Log.d(TAG, "initTopbar!!!: " + mAuth.getCurrentUser().getUid());
+        if(currentUser == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fmcMainTopbar, TopbarFragment.newInstance("LOGIN"))
                     .commitNow();
         }
         else {
-            if (currentUser.get().isAdmin) {
+            if (currentUser.isAdmin) {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fmcMainTopbar, TopbarFragment.newInstance("ORDERS"))

@@ -36,5 +36,5 @@ public class MainViewModel extends ViewModel {
         return creamBuns;
     }
 
-    public Optional<User> getCurrentUser () { return repo.getCurrentUser(); }
+    public User getCurrentUser () { return repo.getCurrentUser(); }
 }
