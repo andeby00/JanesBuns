@@ -9,7 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.List;
+
 
 import dk.au.mad22spring.janesbuns.models.CreamBun;
 
@@ -18,16 +23,17 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
         void onCreamBunClicked(int index);
     }
 
+    StorageReference storageRef;
     private ICreamBunItemClickedListener listener;
     private List<CreamBun> creamBunList;
 
     public CreamBunAdapter(ICreamBunItemClickedListener listener) {
         this.listener = listener;
+        storageRef = FirebaseStorage.getInstance().getReference();
     }
 
     public void updateCreamBunList(List<CreamBun> list, boolean isAdmin) {
         creamBunList = list;
-        //if(isAdmin) creamBunList.add(new CreamBun())
         notifyDataSetChanged();
     }
 
@@ -43,7 +49,9 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
         holder.txtName.setText(creamBunList.get(position).name);
         holder.txtPrice.setText(creamBunList.get(position).price.toString());
         holder.txtAmount.setText(creamBunList.get(position).amount.toString());
-        //Glide.with(holder.imgIcon.getContext()).load(creamBunList.get(position).getStrCreamBunThumb()).placeholder(R.drawable.creamBun_placeholder).into(holder.imgIcon);
+        storageRef.child(creamBunList.get(position).uri).getDownloadUrl().addOnCompleteListener(task -> {
+            Glide.with(holder.imgImage.getContext()).load(task.getResult()).placeholder(R.drawable.plus_sign).into(holder.imgImage);
+        });
     }
 
     @Override

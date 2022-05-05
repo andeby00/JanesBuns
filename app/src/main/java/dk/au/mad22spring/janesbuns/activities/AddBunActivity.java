@@ -29,9 +29,7 @@ public class AddBunActivity extends AppCompatActivity {
     private static final String TAG = "AddBunActivity";
 
     FirebaseFirestore db;
-    StorageReference mStorageRef;
-
-
+    StorageReference storageRef;
 
     EditText name, amount, price;
     Button butt2;
@@ -54,7 +52,7 @@ public class AddBunActivity extends AppCompatActivity {
         image.setOnClickListener(view -> selectImage());
 
         db = FirebaseFirestore.getInstance();
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+        storageRef = FirebaseStorage.getInstance().getReference();
     }
 
     private void selectImage() {
@@ -83,22 +81,22 @@ public class AddBunActivity extends AppCompatActivity {
     }
 
     private void addBun() {
-                CreamBun creamBun = new CreamBun(
-                name.getText().toString(),
-                Integer.parseInt(amount.getText().toString()),
-                Double.parseDouble(price.getText().toString())
-        );
 
-        db.collection("creamBuns").add(creamBun);
-        StorageReference storageReference = mStorageRef.child("images/test1.jpg");
+        StorageReference storageReference = storageRef.child("CreamBuns/test3.jpg");
 
         storageReference.putFile(imgUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Get a URL to the uploaded content
-                        Log.d(TAG, "onSuccess: " + taskSnapshot.getMetadata());
-                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        Log.d(TAG, "onSuccess: " + taskSnapshot.getMetadata().getPath());
+                        CreamBun creamBun = new CreamBun(
+                                name.getText().toString(),
+                                Integer.parseInt(amount.getText().toString()),
+                                Double.parseDouble(price.getText().toString()),
+                                taskSnapshot.getMetadata().getPath()
+                        );
+
+                        db.collection("creamBuns").add(creamBun);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -106,17 +104,8 @@ public class AddBunActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception exception) {
                         Log.d(TAG, "onFailure: image");
                     }
-                })
-                .addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()) {
-
-                            Log.d(TAG, "onComplete: " + task.getResult());
-                        } else {
-                        }
-                    }
                 });
+
         finish();
     }
 }
