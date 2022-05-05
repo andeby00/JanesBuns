@@ -27,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     ProfileViewModel vm;
 
-    private Button buttonLogout, buttonAddBun;
+    private Button buttonLogout;
     private TextView textViewFullName, textViewEmail, textViewPhone, textViewAddress, textViewPostalCode, textViewCity;
 
     @Override
@@ -39,10 +39,9 @@ public class ProfileActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         vm = new ViewModelProvider(this).get(ProfileViewModel.class);
-        vm.initializeVM();
+        vm.initializeVM(this);
 
         buttonLogout = findViewById(R.id.logoutButtonProfile);
-        buttonAddBun = findViewById(R.id.addBunButtonProfile);
         textViewFullName = findViewById(R.id.fullNameTextViewProfile);
         textViewEmail = findViewById(R.id.emailTextViewProfile);
         textViewPhone = findViewById(R.id.phoneTextViewProfile);
@@ -51,48 +50,17 @@ public class ProfileActivity extends AppCompatActivity {
         textViewCity = findViewById(R.id.cityTextViewProfile);
 
         setDetails();
-
-        /*User currentUser = vm.getCurrentUser();
-
-        if(currentUser != null) {
-            if(currentUser.isAdmin) {
-                buttonAddBun.setVisibility(View.VISIBLE);
-
-                buttonAddBun.setOnClickListener(this::onClickAddBun);
-            }
-            else buttonAddBun.setVisibility(View.GONE);
-        }*/
-
-        buttonLogout.setOnClickListener(this::onClickLogout);
-
     }
 
     private void setDetails() {
-        String userId = mAuth.getCurrentUser().getUid();
-        Log.d("profile", userId);
-
-        db.collection("users").document(userId).get().addOnSuccessListener(documentSnapshot -> {
-            User currentUser = documentSnapshot.toObject(User.class);
-            if(currentUser != null) {
-                String fullName = currentUser.email;
-                String email = currentUser.email;
-                String phone = currentUser.phone;
-                String address = currentUser.address;
-                int postalCode = currentUser.postalCode;
-                String city = currentUser.city;
-
-                textViewFullName.setText(fullName);
-                textViewEmail.setText(email);
-                textViewPhone.setText(phone);
-                textViewAddress.setText(address);
-                textViewPostalCode.setText(String.valueOf(postalCode));
-                textViewCity.setText(city);
-            }
+        vm.getCurrentUser().observe(this, user -> {
+            textViewFullName.setText(user.fullName);
+            textViewEmail.setText(user.email);
+            textViewPhone.setText(user.phone);
+            textViewAddress.setText(user.address);
+            textViewPostalCode.setText(String.valueOf(user.postalCode));
+            textViewCity.setText(user.city);
         });
-    }
-
-    private void onClickAddBun(View view) {
-        startActivity(new Intent(this, AddBunActivity.class));
     }
 
     private void onClickLogout(View view) {

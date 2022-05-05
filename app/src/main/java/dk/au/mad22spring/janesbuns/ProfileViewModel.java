@@ -1,5 +1,9 @@
 package dk.au.mad22spring.janesbuns;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.Optional;
@@ -9,9 +13,19 @@ import dk.au.mad22spring.janesbuns.models.User;
 public class ProfileViewModel extends ViewModel {
 
     Repository repo;
+    MutableLiveData<User> currentUser;
 
-    public void initializeVM() { repo = Repository.getInstance(); }
+    public void initializeVM(LifecycleOwner lifecycleOwner) {
+        repo = Repository.getInstance();
+        repo.getCurrentUser().observe(lifecycleOwner, currentUser -> this.currentUser.setValue(currentUser));
+    }
 
-    public User getCurrentUser () { return repo.getCurrentUser(); }
+    public LiveData<User> getCurrentUser () {
+        if (currentUser == null) {
+            currentUser = new MutableLiveData<User>();
+        }
+
+        return currentUser;
+    }
 
 }

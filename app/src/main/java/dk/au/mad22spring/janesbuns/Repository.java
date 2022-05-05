@@ -30,7 +30,7 @@ public class Repository {
     static Repository instance;
 
     MutableLiveData<List<CreamBun>> creamBuns;
-    User currentUser = null;
+    MutableLiveData<User> currentUser = null;
 
     private Repository() {
         //executor = Executors.newSingleThreadExecutor();
@@ -80,12 +80,16 @@ public class Repository {
 
     public void updateCurrentUser(String uid) {
         db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
-            currentUser = documentSnapshot.toObject(User.class);
+            currentUser.setValue(documentSnapshot.toObject(User.class));
         });
         Log.d(TAG, "updateCurrentUser: ");
     }
 
-    public User getCurrentUser() {
+    public LiveData<User> getCurrentUser() {
+        if (currentUser == null) {
+            currentUser = new MutableLiveData<User>();
+        }
+
         return currentUser;
     }
 }

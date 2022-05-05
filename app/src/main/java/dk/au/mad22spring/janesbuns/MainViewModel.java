@@ -14,6 +14,7 @@ import dk.au.mad22spring.janesbuns.models.User;
 
 public class MainViewModel extends ViewModel {
     MutableLiveData<List<CreamBun>> creamBuns;
+    MutableLiveData<User> currentUser;
     Repository repo;
 
     public void initializeVM(LifecycleOwner lifecycleOwner) {
@@ -23,9 +24,9 @@ public class MainViewModel extends ViewModel {
 
         creamBuns = new MutableLiveData<>(new ArrayList<>());
         repo = Repository.getInstance();
-        repo.getCreamBuns().observe(lifecycleOwner, creamBuns -> {
-            this.creamBuns.setValue(creamBuns);
-        });
+        repo.getCreamBuns().observe(lifecycleOwner, creamBuns -> this.creamBuns.setValue(creamBuns) );
+        repo.getCurrentUser().observe(lifecycleOwner, currentUser -> this.currentUser.setValue(currentUser));
+
     }
 
     public LiveData<List<CreamBun>> getCreamBuns() {
@@ -36,5 +37,11 @@ public class MainViewModel extends ViewModel {
         return creamBuns;
     }
 
-    public User getCurrentUser () { return repo.getCurrentUser(); }
+    public LiveData<User> getCurrentUser () {
+        if (currentUser == null) {
+            currentUser = new MutableLiveData<User>();
+        }
+
+        return currentUser;
+    }
 }

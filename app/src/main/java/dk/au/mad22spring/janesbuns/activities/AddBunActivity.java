@@ -37,7 +37,6 @@ public class AddBunActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bun);
 
-
         name = findViewById(R.id.editTextTextPersonName);
         amount = findViewById(R.id.editTextTextPersonName3);
         price = findViewById(R.id.editTextTextPersonName2);

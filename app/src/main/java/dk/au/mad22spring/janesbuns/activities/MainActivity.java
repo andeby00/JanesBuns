@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
 
     MainViewModel vm;
     ActivityResultLauncher<Intent> launcher;
-    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +44,6 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
 
         vm = new ViewModelProvider(this).get(MainViewModel.class);
         vm.initializeVM(this);
-
-        mAuth = FirebaseAuth.getInstance();
-        //Log.d(TAG, "onCreate: " + mAuth.getCurrentUser().getEmail());
 
         creamBunAdapter = new CreamBunAdapter(this);
         rcvCreamBuns = findViewById(R.id.rcvMainCreamBuns);
@@ -59,10 +55,7 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
         butt.setOnClickListener(view -> startActivity(new Intent(this, AddBunActivity.class)));
 
         vm.getCreamBuns().observe(this, creamBuns -> creamBunAdapter.updateCreamBunList(creamBuns, true));
-
-        if (vm.getCurrentUser() != null)
-            Log.d(TAG, "onCreate: " + vm.getCurrentUser().fullName);
-            //Toast.makeText(this, vm.getCurrentUser().get().fullName, Toast.LENGTH_LONG).show();
+        vm.getCurrentUser().observe(this, creamBuns -> initTopbar());
     }
 
     @Override
@@ -72,10 +65,9 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
     }
 
     private void initTopbar() {
-        User currentUser = vm.getCurrentUser();
+        User currentUser = vm.getCurrentUser().getValue();
 
         Log.d(TAG, "initTopbar: " + currentUser);
-        Log.d(TAG, "initTopbar!!!: " + mAuth.getCurrentUser().getUid());
         if(currentUser == null) {
             getSupportFragmentManager()
                     .beginTransaction()
