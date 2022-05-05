@@ -11,9 +11,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Optional;
 import java.util.concurrent.BlockingDeque;
@@ -28,11 +31,13 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
     private static final String TAG = "MainActivity";
     
     RecyclerView rcvCreamBuns;
+    Button butt;
     CreamBunAdapter creamBunAdapter;
 
     MainViewModel vm;
     ActivityResultLauncher<Intent> launcher;
     FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
         rcvCreamBuns.setLayoutManager(new GridLayoutManager(this, 3));
         rcvCreamBuns.setAdapter(creamBunAdapter);
         creamBunAdapter.updateCreamBunList(vm.getCreamBuns().getValue(), true);
+
+        butt = findViewById(R.id.button);
+        butt.setOnClickListener(view -> startActivity(new Intent(this, AddBunActivity.class)));
 
         vm.getCreamBuns().observe(this, creamBuns -> creamBunAdapter.updateCreamBunList(creamBuns, true));
 
