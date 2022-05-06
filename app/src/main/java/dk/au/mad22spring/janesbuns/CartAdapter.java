@@ -15,10 +15,9 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
-
 import dk.au.mad22spring.janesbuns.models.CreamBun;
 
-public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamBunViewHolder> {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CreamBunViewHolder> {
     public interface ICreamBunItemClickedListener {
         void onCreamBunClicked(int index);
     }
@@ -27,32 +26,32 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
     private ICreamBunItemClickedListener listener;
     private List<CreamBun> creamBunList;
 
-    public CreamBunAdapter(ICreamBunItemClickedListener listener) {
+    public CartAdapter(ICreamBunItemClickedListener listener) {
         this.listener = listener;
         storageRef = FirebaseStorage.getInstance().getReference();
     }
 
-    public void updateCreamBunList(List<CreamBun> list, boolean isAdmin) {
+    public void updateCreamBunList(List<CreamBun> list) {
         creamBunList = list;
-        creamBunList.add(new CreamBun("plus_sign.png"));
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public CreamBunViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cream_bun_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false);
         return new CreamBunViewHolder(v, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CreamBunViewHolder holder, int position) {
         holder.txtName.setText(creamBunList.get(position).name);
-        if(creamBunList.get(position).amount > 0) holder.txtAmount.setText(creamBunList.get(position).amount.toString());
-        if(creamBunList.get(position).price > 0) holder.txtPrice.setText(creamBunList.get(position).price.toString());
-        storageRef.child(creamBunList.get(position).uri).getDownloadUrl().addOnCompleteListener(task -> {
-            Glide.with(holder.imgImage.getContext()).load(task.getResult()).placeholder(R.drawable.plus_sign).into(holder.imgImage);
-        });
+        holder.txtPrice.setText(creamBunList.get(position).price.toString());
+        holder.txtAmount.setText(creamBunList.get(position).amount.toString());
+        holder.imgImage.setImageResource(R.drawable.cross);
+//        storageRef.child(creamBunList.get(position).uri).getDownloadUrl().addOnCompleteListener(task -> {
+//            Glide.with(holder.imgImage.getContext()).load(task.getResult()).placeholder(R.drawable.plus_sign).into(holder.imgImage);
+//        });
     }
 
     @Override
@@ -69,22 +68,17 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
         public CreamBunViewHolder(@NonNull View itemView, ICreamBunItemClickedListener creamBunItemClickedListener) {
             super(itemView);
 
-            imgImage = itemView.findViewById(R.id.imgCreamBunItemImage);
-            txtName = itemView.findViewById(R.id.txtCreamBunItemName);
-            txtPrice = itemView.findViewById(R.id.txtCreamBunItemPrice);
-            txtAmount = itemView.findViewById(R.id.txtCreamBunItemAmount);
+            imgImage = itemView.findViewById(R.id.imgCartItemX);
+            txtName = itemView.findViewById(R.id.txtCartItemName);
+            txtAmount = itemView.findViewById(R.id.txtCartItemAmount);
+            txtPrice = itemView.findViewById(R.id.txtCartItemPrice);
             listener = creamBunItemClickedListener;
 
-            itemView.setOnClickListener(this);
+            imgImage.setOnClickListener(view -> onClick(itemView));
         }
 
-        @Override
         public void onClick(View view) {
-            int i = getBindingAdapterPosition();
-            if(i == creamBunList.size() - 1)
-                listener.onCreamBunClicked(-1);
-
-            listener.onCreamBunClicked(i);
+            listener.onCreamBunClicked(getBindingAdapterPosition());
         }
     }
 }

@@ -3,6 +3,9 @@ package dk.au.mad22spring.janesbuns.activities;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import dk.au.mad22spring.janesbuns.CreamBunAdapter;
 import dk.au.mad22spring.janesbuns.MainViewModel;
 import dk.au.mad22spring.janesbuns.R;
+import dk.au.mad22spring.janesbuns.fragments.CartFragment;
 import dk.au.mad22spring.janesbuns.fragments.TopbarFragment;
 import dk.au.mad22spring.janesbuns.models.User;
 
@@ -22,11 +27,13 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
     private static final String TAG = "MainActivity";
     
     RecyclerView rcvCreamBuns;
+    FragmentContainerView cartContainter;
     Button butt;
     CreamBunAdapter creamBunAdapter;
 
     MainViewModel vm;
     ActivityResultLauncher<Intent> launcher;
+    CartFragment cartFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +43,42 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
         vm = new ViewModelProvider(this).get(MainViewModel.class);
         vm.initializeVM(this);
 
+        cartContainter = findViewById(R.id.fmcMainCart);
+
         creamBunAdapter = new CreamBunAdapter(this);
         rcvCreamBuns = findViewById(R.id.rcvMainCreamBuns);
         rcvCreamBuns.setLayoutManager(new GridLayoutManager(this, 3));
         rcvCreamBuns.setAdapter(creamBunAdapter);
         creamBunAdapter.updateCreamBunList(vm.getCreamBuns().getValue(), true);
 
-        butt = findViewById(R.id.button);
-        butt.setOnClickListener(view -> startActivity(new Intent(this, AddBunActivity.class)));
-
         vm.getCurrentUser().observe(this, this::initTopbar);
         vm.getCreamBuns().observe(this, creamBuns -> creamBunAdapter.updateCreamBunList(creamBuns, true));
+
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    Log.d(TAG, "onCreate: 1");
+                    if (result.getResultCode() == RESULT_OK) {
+                        Log.d(TAG, "onCreate: 2");
+                        vm.fetchCreamBuns();
+                    }
+                });
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(R.id.fmcMainCart, CartFragment.newInstance())
+                .commitNow();
+
+        vm.getCart().observe(this, cart -> {
+            if (cart.size() >= 1) {
+                cartContainter.setVisibility(View.VISIBLE);
+            }
+            else {
+                cartContainter.setVisibility(View.GONE);
+            }
+        });
+
+
     }
 
     private void initTopbar(User currentUser) {
@@ -79,13 +111,9 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
         Log.d(TAG, "onCreamBunClicked: " + index);
 
         if (index == -1) {
-            startActivity(new Intent(this, AddBunActivity.class));
+            launcher.launch(new Intent(this, AddBunActivity.class));
+        } else {
+            vm.addToCart(index);
         }
-//        Intent intent = new Intent(this, DetailsActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("Drink", vm.getDrinks().getValue().get(index));
-//        bundle.putInt("Index", index);
-//        intent.putExtras(bundle);
-//        launcher.launch(intent);
     }
 }

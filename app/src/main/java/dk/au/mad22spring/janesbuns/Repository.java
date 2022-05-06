@@ -30,6 +30,7 @@ public class Repository {
     static Repository instance;
 
     MutableLiveData<List<CreamBun>> creamBuns;
+    MutableLiveData<List<CreamBun>> cart;
     MutableLiveData<User> currentUser = null;
 
     private Repository() {
@@ -47,6 +48,10 @@ public class Repository {
             updateCurrentUser(tempUid);
         }
 
+        fetchCreamBuns();
+    }
+
+    public void fetchCreamBuns () {
         db.collection("creamBuns")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -66,7 +71,6 @@ public class Repository {
                         }
                     }
                 });
-
     }
 
     public static Repository getInstance() {
@@ -91,5 +95,29 @@ public class Repository {
         }
 
         return currentUser;
+    }
+
+    public LiveData<List<CreamBun>> getCart() {
+        if (cart == null) {
+            cart = new MutableLiveData<>(new ArrayList<>());
+        }
+
+        return cart;
+    }
+
+    public void addToCart(int index) {
+        List<CreamBun> tempList = getCart().getValue();
+        tempList.add(creamBuns.getValue().get(index));
+
+        cart.setValue(tempList);
+    }
+
+    public void removeFromCart(int index) {
+        List<CreamBun> tempList = getCart().getValue();
+        if (tempList != null) {
+            tempList.remove(index);
+        }
+
+        cart.setValue(tempList);
     }
 }

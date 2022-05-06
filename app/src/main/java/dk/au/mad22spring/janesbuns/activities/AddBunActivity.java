@@ -1,6 +1,7 @@
 package dk.au.mad22spring.janesbuns.activities;
 
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -31,6 +31,8 @@ public class AddBunActivity extends AppCompatActivity {
     Button butt2;
     ImageView image;
     Uri imgUri;
+    ActivityResultLauncher<String> launcher;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,11 @@ public class AddBunActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         storageRef = FirebaseStorage.getInstance().getReference();
+
+        launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), result -> {
+            imgUri = result;
+            if (imgUri != null) image.setImageURI(imgUri);
+        });
     }
 
     private void selectImage() {
@@ -55,28 +62,10 @@ public class AddBunActivity extends AppCompatActivity {
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
 
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), 200);
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
-            if (requestCode == 200) {
-                // Get the url of the image from data
-                imgUri = data.getData();
-                if (null != imgUri) {
-                    // update the preview image in the layout
-                    image.setImageURI(imgUri);
-                }
-            }
-        }
+        launcher.launch("image/*");
     }
 
     private void addBun() {
-
         StorageReference storageReference = storageRef.child("CreamBuns/" + UUID.randomUUID() + ".jpg");
 
         storageReference.putFile(imgUri)
@@ -90,9 +79,16 @@ public class AddBunActivity extends AppCompatActivity {
                     );
 
                     db.collection("creamBuns").add(creamBun);
-                })
-                .addOnFailureListener(exception -> Log.d(TAG, "onFailure: image"));
 
-        finish();
+                    setResult(RESULT_OK);
+                    finish();
+                })
+                .addOnFailureListener(exception -> {
+                    Log.d(TAG, "onFailure: image");
+
+                    setResult(RESULT_CANCELED);
+                    finish();
+                });
+
     }
 }

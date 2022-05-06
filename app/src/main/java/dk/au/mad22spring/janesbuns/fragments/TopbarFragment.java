@@ -3,13 +3,16 @@ package dk.au.mad22spring.janesbuns.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import dk.au.mad22spring.janesbuns.MainViewModel;
 import dk.au.mad22spring.janesbuns.R;
 import dk.au.mad22spring.janesbuns.activities.LoginActivity;
 import dk.au.mad22spring.janesbuns.activities.ProfileActivity;
@@ -21,13 +24,11 @@ import dk.au.mad22spring.janesbuns.activities.ProfileActivity;
  */
 public class TopbarFragment extends Fragment {
     Button button;
-    private static final String ARG_PARAM1 = "";
 
-    private String btnType;
+    static final String ARG_PARAM1 = "";
+    String btnType;
 
-    public TopbarFragment() {
-        // Required empty public constructor
-    }
+    public TopbarFragment() { }
 
     /**
      * Use this factory method to create a new instance of
@@ -75,6 +76,7 @@ public class TopbarFragment extends Fragment {
             button.setOnClickListener(this::onClickAccount);
             button.setText("Account");
         }
+
         return v;
     }
 
