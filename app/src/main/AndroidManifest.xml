@@ -13,6 +13,9 @@
             android:name=".activities.CartActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.OrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ProfileActivity"
             android:exported="false" />
         <activity

@@ -134,11 +134,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 .document(uid).set(user)
                                 .addOnSuccessListener(documentReference -> {
                                     Log.d(TAG, "DocumentSnapshot added with ID: " + uid);
-                                    Toast.makeText(RegisterActivity.this, "User has been registered", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegisterActivity.this, "" + R.string.toastRegister, Toast.LENGTH_LONG).show();
                                     finish();
                                 })
                                 .addOnFailureListener(e -> {
-                                    Toast.makeText(RegisterActivity.this, "User has failed to register", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegisterActivity.this, "" + R.string.toastRegisterF, Toast.LENGTH_LONG).show();
                                     Log.w(TAG, "Error adding document", e);
                                 });
 

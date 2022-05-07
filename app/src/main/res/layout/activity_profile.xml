@@ -14,14 +14,14 @@
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneTextViewProfile"
-        tools:text="Address" />
+        tools:text="@string/address" />
 
     <Button
         android:id="@+id/logoutButtonProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="Logout"
+        android:text="@string/logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,7 +34,7 @@
         android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Fullname" />
+        tools:text="@string/name" />
 
     <TextView
         android:id="@+id/emailTextViewProfile"
@@ -44,7 +44,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullNameTextViewProfile"
-        tools:text="Email adress" />
+        tools:text="@string/mail" />
 
     <TextView
         android:id="@+id/phoneTextViewProfile"
@@ -54,7 +54,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailTextViewProfile"
-        tools:text="Phone" />
+        tools:text="@string/phone" />
 
     <TextView
         android:id="@+id/postalCodeTextViewProfile"
@@ -62,9 +62,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
-        android:text="Postal  Code"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addressTextViewProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/addressTextViewProfile"
+        tools:text="@string/postalCode" />
 
     <TextView
         android:id="@+id/cityTextViewProfile"
@@ -72,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
-        android:text="City"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postalCodeTextViewProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/postalCodeTextViewProfile"
+        tools:text="@string/city" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,15 +66,15 @@ public class TopbarFragment extends Fragment {
         button = v.findViewById(R.id.btnTopbarButton);
         if(btnType == "LOGIN") {
             button.setOnClickListener(this::onClickLogin);
-            button.setText("Login");
+            button.setText(R.string.topBarButtonLogin);
         }
         if(btnType == "ORDERS") {
             button.setOnClickListener(this::onClickAccount);
-            button.setText("Account");
+            button.setText(R.string.topBarButtonOrders);
         }
         if(btnType == "ACCOUNT") {
             button.setOnClickListener(this::onClickAccount);
-            button.setText("Account");
+            button.setText(R.string.topBarButtonAccount);
         }
 
         return v;

@@ -63,19 +63,19 @@ public class LoginActivity extends AppCompatActivity {
         String password = editTextPassword.getText().toString().trim();
 
         if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("You have to enter a valid email");
+            editTextEmail.setError("" + R.string.invalidMail);
             editTextEmail.requestFocus();
             return;
         }
 
         if(password.isEmpty()) {
-            editTextPassword.setError("Password can't be empty");
+            editTextPassword.setError("" + R.string.invalidPass);
             editTextPassword.requestFocus();
             return;
         }
 
         if(password.length() < 6) {
-            editTextPassword.setError("Password must be over 6 characters");
+            editTextPassword.setError("" + R.string.invalidPass2);
             editTextPassword.requestFocus();
             return;
         }
@@ -83,13 +83,13 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()) {
-                        Toast.makeText(this, "Successfully logged in as " + email, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "" + R.string.toastLogin + email, Toast.LENGTH_LONG).show();
                         vm.updateCurrentUser(task.getResult().getUser().getUid());
                         //startActivity(new Intent(this, ProfileActivity.class));
                         finish();
                     }
                     else {
-                        Toast.makeText(this, "User has failed to login", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "" + R.string.toastLoginF, Toast.LENGTH_LONG).show();
                     }
                 });
     }

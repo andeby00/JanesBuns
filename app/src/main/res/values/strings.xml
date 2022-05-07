@@ -1,5 +1,32 @@
 <resources>
     <string name="app_name">Janes Buns</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="account">Account</string>
+    <string name="orders">Orders</string>
+    <string name="login">Login</string>
+    <string name="quantity">Qty</string>
+    <string name="price">kr</string>
+    <string name="mail">Mail</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="name">Full Name</string>
+    <string name="phone">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="postalCode">Postal Code</string>
+    <string name="city">City</string>
+    <string name="registerUser">Register User</string>
+    <string name="itemsInCart">Items in cart</string>
+    <string name="cart">Cart</string>
+    <string name="janesBuns">Jane\'s Buns</string>
+    <string name="logout">Logout</string>
+    <string name="deliveryDate">Delivery Date</string>
+    <string name="time">Time</string>
+    <string name="total">Total</string>
+    <string name="addBun">Add Cream Bun</string>
+    <string name="invalidMail">You must provide a valid email</string>
+    <string name="invalidPass">Password can\'t be empty</string>
+    <string name="invalidPass2">Password must be over 6 characters</string>
+    <string name="toastLogin">Successfully logged in as</string>
+    <string name="toastLoginF">User has failed to login</string>
+    <string name="toastRegister">User has failed to register</string>
+    <string name="toastRegisterF">User has failed to register</string>
 </resources>

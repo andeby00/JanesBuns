@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Janes Buns</string>
+    <string name="account">Account</string>
+    <string name="orders">Bestillinger</string>
+    <string name="login">Login</string>
+    <string name="quantity">stk.</string>
+    <string name="price">kr</string>
+    <string name="mail">Mail</string>
+    <string name="password">Adgangskode</string>
+    <string name="register">Tilmeld</string>
+    <string name="name">Fulde navn</string>
+    <string name="phone">Telefonnummer</string>
+    <string name="address">Adresse</string>
+    <string name="postalCode">Post nummer</string>
+    <string name="city">By</string>
+    <string name="registerUser">Tilmeld bruger</string>
+    <string name="itemsInCart">Varer i indkøbskurven</string>
+    <string name="cart">Indkøbskurv</string>
+    <string name="janesBuns">Jane\'s Buns</string>
+    <string name="logout">Log ud</string>
+    <string name="deliveryDate">Leveringsdato</string>
+    <string name="time">Tid</string>
+    <string name="total">Total</string>
+    <string name="addBun">Tilføj flødebolle</string>
+    <string name="invalidMail">Du skal bruge en valid email</string>
+    <string name="invalidPass">Password kan ikke være tom</string>
+    <string name="invalidPass2">Password skal være over 6 karakterer</string>
+    <string name="toastLogin">Logget ind som</string>
+    <string name="toastLoginF">Bruger har fejlet login</string>
+    <string name="toastRegister">Bruger har registreret sig</string>
+    <string name="toastRegisterF">Bruger har fejlet registrering</string>
+</resources>

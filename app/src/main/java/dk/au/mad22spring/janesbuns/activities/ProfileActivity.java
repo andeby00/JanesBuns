@@ -23,7 +23,6 @@ import dk.au.mad22spring.janesbuns.models.User;
 public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    FirebaseFirestore db;
 
     ProfileViewModel vm;
 
@@ -36,7 +35,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
 
         vm = new ViewModelProvider(this).get(ProfileViewModel.class);
         vm.initializeVM(this);
@@ -50,6 +48,8 @@ public class ProfileActivity extends AppCompatActivity {
         textViewCity = findViewById(R.id.cityTextViewProfile);
 
         setDetails();
+
+        buttonLogout.setOnClickListener(this::onClickLogout);
     }
 
     private void setDetails() {

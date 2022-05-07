@@ -45,7 +45,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ICrea
             for (CreamBun creamBun: creamBuns) {
                 tempTotal += creamBun.price;
             }
-            textPrice.setText(tempTotal.toString());
+            textPrice.setText(tempTotal.toString() + R.string.quantity);
         });
     }
 
