@@ -37,7 +37,7 @@ public class Repository {
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     static Repository instance;
-
+    RequestQueue queue;
     MutableLiveData<List<CreamBun>> creamBuns;
     MutableLiveData<List<CreamBun>> cart;
     MutableLiveData<User> currentUser = null;

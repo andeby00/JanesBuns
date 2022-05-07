@@ -35,7 +35,7 @@ public class CurrencyAPI {
     private static void sendRequest(String convertTo, RequestQueue queue, Application app) {
         StringRequest mRequest = new StringRequest(
                 Request.Method.GET,
-                "https://free.currconv.com/api/v7/convert?q=DKK_" + convertTo + "," + convertTo + "_DKK&compact=ultra&apiKey=8c339bcbe21bcd7cbb1b",
+                "https://free.currconv.com/api/v7/currencies?apiKey=8c339bcbe21bcd7cbb1b",
                 response -> getCurrency(response, app),
                 error -> Log.e(TAG, "that did not work", error ));
         queue.add(mRequest);
@@ -46,7 +46,7 @@ public class CurrencyAPI {
         Executors.newSingleThreadExecutor().execute(() -> {
             List<Currency> currency = parseJson(response);
             if (currency != null){
-                Log.d(TAG, "saveDrink: " + currency.get(0).getCurrencySymbol());
+                Log.d(TAG, "CurrencySymbol: " + currency.get(0).getCurrencySymbol());
             }
         });
     }
