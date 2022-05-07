@@ -1,61 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstraintLayout"
+    android:id="@+id/ConstraintLayout1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="3dp"
     android:background="@drawable/border">
 
-    <ImageView
-        android:id="@+id/imgCreamBunItemImage"
-        android:layout_width="129dp"
-        android:layout_height="129dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/txtCreamBunItemName"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imgCreamBunItemImage"
-        app:layout_constraintStart_toStartOf="@+id/imgCreamBunItemImage"
-        app:layout_constraintTop_toBottomOf="@+id/imgCreamBunItemImage"
-        tools:text="Flaming cheetos" />
-
-    <TextView
-        android:id="@+id/txtCreamBunItemPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="1dp"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCreamBunItemName"
-        tools:text="399 kr" />
-
-    <TextView
-        android:id="@+id/txtCreamBunItemAmount"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/txtCreamBunItemPrice"
-        app:layout_constraintEnd_toEndOf="@+id/imgCreamBunItemImage"
-        app:layout_constraintTop_toTopOf="@+id/txtCreamBunItemPrice"
-        tools:text="4 stk" />
+        android:elevation="10dp"
+
+        app:cardCornerRadius="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgCreamBunItemImage"
+                android:layout_width="129dp"
+                android:layout_height="129dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/txtCreamBunItemName"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/imgCreamBunItemImage"
+                app:layout_constraintStart_toStartOf="@+id/imgCreamBunItemImage"
+                app:layout_constraintTop_toBottomOf="@+id/imgCreamBunItemImage"
+                tools:text="Flaming cheetos" />
+
+            <TextView
+                android:id="@+id/txtCreamBunItemPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="1dp"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCreamBunItemName"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="399 kr" />
+
+            <TextView
+                android:id="@+id/txtCreamBunItemAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCreamBunItemPrice"
+                app:layout_constraintEnd_toEndOf="@+id/imgCreamBunItemImage"
+                app:layout_constraintTop_toTopOf="@+id/txtCreamBunItemPrice"
+                tools:text="4 stk" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

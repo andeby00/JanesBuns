@@ -3,30 +3,18 @@ package dk.au.mad22spring.janesbuns.utils;
 import android.app.Application;
 import android.util.Log;
 
-
-import androidx.annotation.NonNull;
-import androidx.sqlite.db.SupportSQLiteDatabase;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import javax.net.ssl.HttpsURLConnection;
-
-import dk.au.mad22spring.janesbuns.Repository;
 import dk.au.mad22spring.janesbuns.models.Currency;
 
-    // https://www.currencyconverterapi.com/docs
+// https://www.currencyconverterapi.com/docs
 public class CurrencyAPI {
     private static final String TAG = "CurrencyAPI";
 

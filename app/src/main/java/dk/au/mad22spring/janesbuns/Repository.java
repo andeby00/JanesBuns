@@ -6,12 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +20,6 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import dk.au.mad22spring.janesbuns.models.CreamBun;
 import dk.au.mad22spring.janesbuns.models.Currency;
@@ -31,20 +27,16 @@ import dk.au.mad22spring.janesbuns.models.User;
 
 public class Repository {
     static final String TAG = "Repository";
+    static Repository instance;
 
-    //private final ExecutorService executor;
-    //private final Api api;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
-    static Repository instance;
     RequestQueue queue;
     MutableLiveData<List<CreamBun>> creamBuns;
     MutableLiveData<List<CreamBun>> cart;
     MutableLiveData<User> currentUser = null;
 
     private Repository() {
-        //executor = Executors.newSingleThreadExecutor();
-        //api = new Api(app.getApplicationContext());
         creamBuns = new MutableLiveData<>(new ArrayList<>());
 
         db = FirebaseFirestore.getInstance();
@@ -149,5 +141,10 @@ public class Repository {
         Gson gson = new GsonBuilder().create();
         Currency currency = gson.fromJson(json, Currency.class);
         return currency.currencies;
+    }
+
+
+    public void clearCart() {
+        cart.setValue(new ArrayList<>());
     }
 }

@@ -40,7 +40,7 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_cart, container, false);
         text = v.findViewById(R.id.txtCartText);
-        button = v.findViewById(R.id.btnCartButton);
+        button = v.findViewById(R.id.btnCartToCart);
 
         button.setOnClickListener(view -> startActivity(new Intent(getActivity(), CartActivity.class)));
 

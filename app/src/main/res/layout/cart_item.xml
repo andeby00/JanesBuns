@@ -43,7 +43,7 @@
         android:id="@+id/txtCartItemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="100dp"
         android:layout_marginEnd="8dp"
         android:text="399 kr"
         android:textSize="14sp"

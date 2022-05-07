@@ -48,8 +48,8 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
     @Override
     public void onBindViewHolder(@NonNull CreamBunViewHolder holder, int position) {
         holder.txtName.setText(creamBunList.get(position).name);
-        if(creamBunList.get(position).amount > 0) holder.txtAmount.setText(creamBunList.get(position).amount.toString() + R.string.txtCreamBunItemQty);
-        if(creamBunList.get(position).price > 0) holder.txtPrice.setText(creamBunList.get(position).price.toString() + R.string.txtCreamBunItemPrice);
+        if(creamBunList.get(position).amount > 0) holder.txtAmount.setText(creamBunList.get(position).amount.toString() + R.string.quantity);//R.string.txtCreamBunItemQty
+        if(creamBunList.get(position).price > 0) holder.txtPrice.setText(creamBunList.get(position).price.toString() + R.string.price);
         storageRef.child(creamBunList.get(position).uri).getDownloadUrl().addOnCompleteListener(task -> {
             Glide.with(holder.imgImage.getContext()).load(task.getResult()).placeholder(R.drawable.plus_sign).into(holder.imgImage);
         });
