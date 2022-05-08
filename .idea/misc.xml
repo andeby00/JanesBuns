@@ -11,6 +11,34 @@
         <entry key="..\:/Users/Rasmus/Desktop/JanesBuns/app/src/main/res/layout/fragment_bun.xml" value="0.3875" />
         <entry key="..\:/Users/Rasmus/Desktop/JanesBuns/app/src/main/res/layout/fragment_bun_list.xml" value="0.3734375" />
         <entry key="..\:/Users/Rasmus/Desktop/JanesBuns/app/src/main/res/layout/fragment_topbar.xml" value="0.5" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/activity_add_bun.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/activity_cart.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/activity_login.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/activity_main.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/activity_order.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/activity_profile.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/activity_register.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/cart_item.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/cream_bun_item.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/fragment_cart.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/fragment_topbar.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout-land/order_item.xml" value="0.7927927927927928" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/activity_add_bun.xml" value="0.33" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/activity_admin_order_details.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/activity_cart.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/activity_login.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/activity_order.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/activity_order_details.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/activity_profile.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/activity_register.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/cart_item.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/cream_bun_item.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/fragment_cart.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/fragment_topbar.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/layout/order_item.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19" />
+        <entry key="..\:/Users/mads-/OneDrive/Desktop/IKT-Universitet/6_SEMESTER/MAD/AppProject/JanesBuns/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.314" />
       </map>
     </option>
   </component>

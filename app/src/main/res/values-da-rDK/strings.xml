@@ -5,7 +5,9 @@
     <string name="orders">Bestillinger</string>
     <string name="login">Login</string>
     <string name="quantity">stk.</string>
+    <string name="quantityAddBun">Antal</string>
     <string name="price">kr</string>
+    <string name="priceAddBun">Pris</string>
     <string name="mail">Mail</string>
     <string name="password">Adgangskode</string>
     <string name="register">Tilmeld</string>
