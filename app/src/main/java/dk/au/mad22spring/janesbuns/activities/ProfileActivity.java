@@ -27,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
     ProfileViewModel vm;
 
     private Button buttonLogout;
-    private TextView textViewFullName, textViewEmail, textViewPhone, textViewAddress, textViewPostalCode, textViewCity;
+    private TextView textViewFullName, textViewEmail, textViewPhone, textViewAddress, textViewPostalCode, textViewCity, textViewOrders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         vm.initializeVM(this);
 
         buttonLogout = findViewById(R.id.logoutButtonProfile);
+        textViewOrders = findViewById(R.id.txtProfileViewOrder);
         textViewFullName = findViewById(R.id.fullNameTextViewProfile);
         textViewEmail = findViewById(R.id.emailTextViewProfile);
         textViewPhone = findViewById(R.id.phoneTextViewProfile);
@@ -50,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
         setDetails();
 
         buttonLogout.setOnClickListener(this::onClickLogout);
+        textViewOrders.setOnClickListener(this::onClickOrder);
     }
 
     private void setDetails() {
@@ -66,5 +68,9 @@ public class ProfileActivity extends AppCompatActivity {
     private void onClickLogout(View view) {
         mAuth.signOut();
         startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+    }
+
+    private void onClickOrder(View view) {
+        startActivity(new Intent(this, OrderActivity.class));
     }
 }

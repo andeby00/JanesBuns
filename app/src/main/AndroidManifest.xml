@@ -13,11 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JanesBuns">
+        <activity
+            android:name=".activities.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AdminOrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.OrderActivity"
+            android:exported="false" />
+
         <service
             android:name=".utils.OrderService"
-            android:label="OrderService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:label="OrderService" />
+
         <activity
             android:name=".activities.CartActivity"
             android:exported="false" />

@@ -23,6 +23,7 @@ import java.util.List;
 
 import dk.au.mad22spring.janesbuns.models.CreamBun;
 import dk.au.mad22spring.janesbuns.models.Currency;
+import dk.au.mad22spring.janesbuns.models.Order;
 import dk.au.mad22spring.janesbuns.models.User;
 
 public class Repository {
@@ -34,6 +35,7 @@ public class Repository {
     RequestQueue queue;
     MutableLiveData<List<CreamBun>> creamBuns;
     MutableLiveData<List<CreamBun>> cart;
+    MutableLiveData<List<Order>> orders;
     MutableLiveData<User> currentUser = null;
 
     private Repository() {
@@ -71,6 +73,25 @@ public class Repository {
                 });
     }
 
+    public void fetchOrders () {
+        db.collection("orders")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<Order> tempOrders = new ArrayList<>();
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            tempOrders.add(document.toObject(Order.class));
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+                        }
+
+                        orders.setValue(tempOrders);
+                    } else {
+                        Log.w(TAG, "Error getting documents.", task.getException());
+                    }
+                });
+    }
+
     public static Repository getInstance() {
         if(instance==null){
             instance = new Repository();
@@ -101,6 +122,14 @@ public class Repository {
         }
 
         return cart;
+    }
+
+    public LiveData<List<Order>> getOrders() {
+        if (orders == null) {
+            orders = new MutableLiveData<>(new ArrayList<>());
+        }
+
+        return orders;
     }
 
     public void addToCart(int index) {

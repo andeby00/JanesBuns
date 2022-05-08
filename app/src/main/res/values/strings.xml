@@ -38,5 +38,6 @@
     <string name="addressError">Address can\'t be empty</string>
     <string name="cityError">City can\'t be empty</string>
     <string name="postalCodeError">Postal code can\'t be empty</string>
+    <string name="viewOrder">View active orders</string>
 
 </resources>

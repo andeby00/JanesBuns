@@ -76,4 +76,13 @@
         app:layout_constraintTop_toBottomOf="@+id/postalCodeTextViewProfile"
         tools:text="@string/city" />
 
+    <TextView
+        android:id="@+id/txtProfileViewOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/viewOrder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cityTextViewProfile"
+        app:layout_constraintTop_toBottomOf="@+id/cityTextViewProfile" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

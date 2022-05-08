@@ -15,6 +15,7 @@ import android.widget.Button;
 import dk.au.mad22spring.janesbuns.MainViewModel;
 import dk.au.mad22spring.janesbuns.R;
 import dk.au.mad22spring.janesbuns.activities.LoginActivity;
+import dk.au.mad22spring.janesbuns.activities.OrderActivity;
 import dk.au.mad22spring.janesbuns.activities.ProfileActivity;
 
 /**
@@ -69,15 +70,22 @@ public class TopbarFragment extends Fragment {
             button.setText(getString(R.string.login));
         }
         if(btnType == "ORDERS") {
-            button.setOnClickListener(this::onClickAccount);
+            button.setOnClickListener(this::onClickOrders);
             button.setText(getString(R.string.orders));
         }
         if(btnType == "ACCOUNT") {
             button.setOnClickListener(this::onClickAccount);
             button.setText(getString(R.string.account));
         }
+        if(btnType == "BACK") {
+            button.setOnClickListener(view -> getActivity().finish());
+        }
 
         return v;
+    }
+
+    private void onClickOrders(View view) {
+        startActivity(new Intent(getActivity().getApplicationContext(), OrderActivity.class));
     }
 
     private void onClickAccount(View view) {
