@@ -48,7 +48,7 @@ public class OrderService extends Service {
         builder = new NotificationCompat.Builder(this, SERVICE_CHANNEL)
                 .setContentTitle("New Order received")
                 .setContentText("")
-                .setSmallIcon(R.drawable.cross);
+                .setSmallIcon(R.drawable.creambun_placeholder);
 
 
         doNotificationSleeper();
