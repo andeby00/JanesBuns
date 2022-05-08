@@ -30,4 +30,13 @@
     <string name="toastLoginF">Bruger har fejlet login</string>
     <string name="toastRegister">Bruger har registreret sig</string>
     <string name="toastRegisterF">Bruger har fejlet registrering</string>
+    <string name="nameError">Navn kan ikke være tom</string>
+    <string name="phoneError">Telefon nummer kan ikke være tom</string>
+    <string name="phoneError2">Telefon nummeret er ikke gyldigt</string>
+    <string name="mailError">Email kan ikke være tom</string>
+    <string name="mailError2">Emailen er ikke gyldig</string>
+    <string name="passwordError">Password skal være over 6 karakterer</string>
+    <string name="addressError">Adresse kan ikke være tom</string>
+    <string name="cityError">By kan ikke være tom</string>
+    <string name="postalCodeError">Postnummer kan ikke være tom</string>
 </resources>

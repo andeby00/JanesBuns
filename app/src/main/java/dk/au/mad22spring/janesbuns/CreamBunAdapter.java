@@ -1,5 +1,7 @@
 package dk.au.mad22spring.janesbuns;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +28,11 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
     StorageReference storageRef;
     private ICreamBunItemClickedListener listener;
     private List<CreamBun> creamBunList;
+    private Context context;
 
-    public CreamBunAdapter(ICreamBunItemClickedListener listener) {
+    public CreamBunAdapter(ICreamBunItemClickedListener listener, Context context) {
         this.listener = listener;
+        this.context = context;
         storageRef = FirebaseStorage.getInstance().getReference();
     }
 
@@ -48,8 +52,9 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
     @Override
     public void onBindViewHolder(@NonNull CreamBunViewHolder holder, int position) {
         holder.txtName.setText(creamBunList.get(position).name);
-        if(creamBunList.get(position).amount > 0) holder.txtAmount.setText(creamBunList.get(position).amount.toString() + R.string.quantity);//R.string.txtCreamBunItemQty
-        if(creamBunList.get(position).price > 0) holder.txtPrice.setText(creamBunList.get(position).price.toString() + R.string.price);
+        Log.d("TAG", "onBindViewHolder: " + creamBunList.get(position).amount.toString());
+        if(creamBunList.get(position).amount > 0) holder.txtAmount.setText(creamBunList.get(position).amount.toString() + " " + context.getString(R.string.quantity));//R.string.txtCreamBunItemQty
+        if(creamBunList.get(position).price > 0) holder.txtPrice.setText(creamBunList.get(position).price.toString() + " " + context.getString(R.string.price));
         storageRef.child(creamBunList.get(position).uri).getDownloadUrl().addOnCompleteListener(task -> {
             Glide.with(holder.imgImage.getContext()).load(task.getResult()).placeholder(R.drawable.creambun_placeholder).into(holder.imgImage);
         });

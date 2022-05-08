@@ -14,7 +14,7 @@
     <string name="postalCode">Postal Code</string>
     <string name="city">City</string>
     <string name="registerUser">Register User</string>
-    <string name="itemsInCart">Items in cart</string>
+    <string name="itemsInCart">Items in cart: </string>
     <string name="cart">Cart</string>
     <string name="janesBuns">Jane\'s Buns</string>
     <string name="logout">Logout</string>
@@ -27,6 +27,16 @@
     <string name="invalidPass2">Password must be over 6 characters</string>
     <string name="toastLogin">Successfully logged in as</string>
     <string name="toastLoginF">User has failed to login</string>
-    <string name="toastRegister">User has failed to register</string>
+    <string name="toastRegister">User has registered</string>
     <string name="toastRegisterF">User has failed to register</string>
+    <string name="nameError">Name can\'t be empty</string>
+    <string name="phoneError">Phone can\'t be empty</string>
+    <string name="phoneError2">Phone number isn\'t valid</string>
+    <string name="mailError">Email can\'t be empty</string>
+    <string name="mailError2">Email isn\'t valid</string>
+    <string name="passwordError">Password must be over 6 characters</string>
+    <string name="addressError">Address can\'t be empty</string>
+    <string name="cityError">City can\'t be empty</string>
+    <string name="postalCodeError">Postal code can\'t be empty</string>
+
 </resources>

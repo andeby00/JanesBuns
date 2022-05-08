@@ -1,5 +1,6 @@
 package dk.au.mad22spring.janesbuns;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CreamBunViewHo
     StorageReference storageRef;
     private ICreamBunItemClickedListener listener;
     private List<CreamBun> creamBunList;
+    private Context context;
 
-    public CartAdapter(ICreamBunItemClickedListener listener) {
+    public CartAdapter(ICreamBunItemClickedListener listener, Context context) {
         this.listener = listener;
+        this.context = context;
         storageRef = FirebaseStorage.getInstance().getReference();
     }
 
@@ -46,8 +49,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CreamBunViewHo
     @Override
     public void onBindViewHolder(@NonNull CreamBunViewHolder holder, int position) {
         holder.txtName.setText(creamBunList.get(position).name);
-        holder.txtPrice.setText(creamBunList.get(position).price.toString());
-        holder.txtAmount.setText(creamBunList.get(position).amount.toString());
+        holder.txtPrice.setText(creamBunList.get(position).price.toString() + " " + context.getString(R.string.price));
+        holder.txtAmount.setText(creamBunList.get(position).amount.toString() + " " + context.getString(R.string.quantity));
         holder.imgImage.setImageResource(R.drawable.cross);
 //        storageRef.child(creamBunList.get(position).uri).getDownloadUrl().addOnCompleteListener(task -> {
 //            Glide.with(holder.imgImage.getContext()).load(task.getResult()).placeholder(R.drawable.plus_sign).into(holder.imgImage);

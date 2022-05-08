@@ -63,19 +63,19 @@ public class LoginActivity extends AppCompatActivity {
         String password = editTextPassword.getText().toString().trim();
 
         if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("" + R.string.invalidMail);
+            editTextEmail.setError("" + getString(R.string.invalidMail));
             editTextEmail.requestFocus();
             return;
         }
 
         if(password.isEmpty()) {
-            editTextPassword.setError("" + R.string.invalidPass);
+            editTextPassword.setError("" + getString(R.string.invalidPass));
             editTextPassword.requestFocus();
             return;
         }
 
         if(password.length() < 6) {
-            editTextPassword.setError("" + R.string.invalidPass2);
+            editTextPassword.setError("" + getString(R.string.invalidPass2));
             editTextPassword.requestFocus();
             return;
         }
@@ -83,13 +83,13 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()) {
-                        Toast.makeText(this, "" + R.string.toastLogin + email, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "" + getString(R.string.toastLogin) + email, Toast.LENGTH_LONG).show();
                         vm.updateCurrentUser(task.getResult().getUser().getUid());
                         //startActivity(new Intent(this, ProfileActivity.class));
                         finish();
                     }
                     else {
-                        Toast.makeText(this, "" + R.string.toastLoginF, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "" + getString(R.string.toastLoginF), Toast.LENGTH_LONG).show();
                     }
                 });
     }

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
 
         cartContainter = findViewById(R.id.fmcMainCart);
 
-        creamBunAdapter = new CreamBunAdapter(this);
+        creamBunAdapter = new CreamBunAdapter(this, this);
         rcvCreamBuns = findViewById(R.id.rcvMainCreamBuns);
         rcvCreamBuns.setLayoutManager(new GridLayoutManager(this, 3));
         rcvCreamBuns.setAdapter(creamBunAdapter);

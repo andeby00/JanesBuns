@@ -46,7 +46,7 @@ public class CartFragment extends Fragment {
 
         mainVM = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         mainVM.getCart().observe(getActivity(), creamBuns -> {
-            text.setText("Items in cart: " + creamBuns.size());
+            text.setText(getString(R.string.itemsInCart) + creamBuns.size());
         });
 
         return v;

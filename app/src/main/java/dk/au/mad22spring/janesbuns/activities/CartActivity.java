@@ -60,7 +60,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ICrea
         vm = new ViewModelProvider(this).get(CartViewModel.class);
         vm.initializeVM(this);
 
-        cartAdapter = new CartAdapter(this);
+        cartAdapter = new CartAdapter(this, this);
         rcvCart = findViewById(R.id.rcvCartOrder);
         rcvCart.setLayoutManager(new LinearLayoutManager(this));
         rcvCart.setAdapter(cartAdapter);
@@ -99,7 +99,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.ICrea
             for (CreamBun creamBun: creamBuns) {
                 tempTotal += creamBun.price;
             }
-            textPrice.setText(tempTotal.toString() + R.string.quantity);
+            textPrice.setText(tempTotal.toString() + " " + getString(R.string.price));
         });
     }
 

@@ -66,61 +66,61 @@ public class RegisterActivity extends AppCompatActivity {
         int postalCode = Integer.parseInt(editTextPostalCode.getText().toString().trim());
 
         if(fullName.isEmpty()) {
-            editTextFullName.setError("Name can't be empty");
+            editTextFullName.setError(getString(R.string.nameError));
             editTextFullName.requestFocus();
             return;
         }
 
         if(phone.isEmpty()) {
-            editTextPhone.setError("Phone can't be empty");
+            editTextPhone.setError(getString(R.string.phoneError));
             editTextPhone.requestFocus();
             return;
         }
 
         if(!Patterns.PHONE.matcher(phone).matches()) {
-            editTextPhone.setError("Phone number isn't valid");
+            editTextPhone.setError(getString(R.string.phoneError2));
             editTextPhone.requestFocus();
             return;
         }
 
         if(email.isEmpty()) {
-            editTextEmail.setError("Email can't be empty");
+            editTextEmail.setError(getString(R.string.mailError));
             editTextEmail.requestFocus();
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Email isn't valid");
+            editTextEmail.setError(getString(R.string.mailError2));
             editTextEmail.requestFocus();
             return;
         }
 
         if(password.isEmpty()) {
-            editTextPassword.setError("Password can't be empty");
+            editTextPassword.setError(getString(R.string.invalidPass));
             editTextPassword.requestFocus();
             return;
         }
 
         if(password.length() < 6) {
-            editTextPassword.setError("Password must be over 6 characters");
+            editTextPassword.setError(getString(R.string.passwordError));
             editTextPassword.requestFocus();
             return;
         }
 
         if(address.isEmpty()) {
-            editTextAddress.setError("Address can't be empty");
+            editTextAddress.setError(getString(R.string.addressError));
             editTextAddress.requestFocus();
             return;
         }
 
         if(city.isEmpty()) {
-            editTextCity.setError("City can't be empty");
+            editTextCity.setError(getString(R.string.cityError));
             editTextCity.requestFocus();
             return;
         }
 
         if(postalCode <= 0) {
-            editTextPostalCode.setError("Address can't be empty");
+            editTextPostalCode.setError(getString(R.string.postalCodeError));
             editTextPostalCode.requestFocus();
             return;
         }
@@ -134,11 +134,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 .document(uid).set(user)
                                 .addOnSuccessListener(documentReference -> {
                                     Log.d(TAG, "DocumentSnapshot added with ID: " + uid);
-                                    Toast.makeText(RegisterActivity.this, "" + R.string.toastRegister, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegisterActivity.this, getString(R.string.toastRegister), Toast.LENGTH_LONG).show();
                                     finish();
                                 })
                                 .addOnFailureListener(e -> {
-                                    Toast.makeText(RegisterActivity.this, "" + R.string.toastRegisterF, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegisterActivity.this, getString(R.string.toastRegisterF), Toast.LENGTH_LONG).show();
                                     Log.w(TAG, "Error adding document", e);
                                 });
 
@@ -156,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     else {
                         Log.w(TAG, "registerUser: " + task.getException());
-                        Toast.makeText(RegisterActivity.this, "User has failed to register", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, getString(R.string.toastRegisterF), Toast.LENGTH_LONG).show();
                     }
                 });
     }
