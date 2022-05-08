@@ -1,20 +1,18 @@
 package dk.au.mad22spring.janesbuns.activities;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import dk.au.mad22spring.janesbuns.CreamBunAdapter;
 import dk.au.mad22spring.janesbuns.MainViewModel;
@@ -22,6 +20,7 @@ import dk.au.mad22spring.janesbuns.R;
 import dk.au.mad22spring.janesbuns.fragments.CartFragment;
 import dk.au.mad22spring.janesbuns.fragments.TopbarFragment;
 import dk.au.mad22spring.janesbuns.models.User;
+import dk.au.mad22spring.janesbuns.utils.OrderService;
 
 public class MainActivity extends AppCompatActivity implements CreamBunAdapter.ICreamBunItemClickedListener {
     private static final String TAG = "MainActivity";
@@ -51,8 +50,15 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
         rcvCreamBuns.setAdapter(creamBunAdapter);
         creamBunAdapter.updateCreamBunList(vm.getCreamBuns().getValue(), true);
 
+        initTopbar(vm.getCurrentUser().getValue());
         vm.getCurrentUser().observe(this, this::initTopbar);
-        vm.getCreamBuns().observe(this, creamBuns -> creamBunAdapter.updateCreamBunList(creamBuns, true));
+        vm.getCreamBuns().observe(this, creamBuns -> {
+            User currentUser = vm.getCurrentUser().getValue();
+            if(currentUser != null)
+                creamBunAdapter.updateCreamBunList(creamBuns, currentUser.isAdmin);
+            else
+                creamBunAdapter.updateCreamBunList(creamBuns, false);
+        });
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -91,7 +97,9 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
                     .commitNow();
         }
         else {
+            creamBunAdapter.updateCreamBunList(vm.getCreamBuns().getValue(), currentUser.isAdmin);
             if (currentUser.isAdmin) {
+                startService(new Intent(this, OrderService.class));
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fmcMainTopbar, TopbarFragment.newInstance("ORDERS"))

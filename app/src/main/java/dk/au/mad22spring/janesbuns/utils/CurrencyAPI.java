@@ -19,7 +19,7 @@ public class CurrencyAPI {
     private static final String TAG = "CurrencyAPI";
 
 
-        // https://free.currconv.com/api/v7/convert?q=DKK_EUR,EUR_DKK&compact=ultra&apiKey=8c339bcbe21bcd7cbb1b
+    // https://free.currconv.com/api/v7/convert?q=DKK_EUR,EUR_DKK&compact=ultra&apiKey=8c339bcbe21bcd7cbb1b
     private static void sendRequest(String convertTo, RequestQueue queue, Application app) {
         StringRequest mRequest = new StringRequest(
                 Request.Method.GET,
@@ -39,9 +39,9 @@ public class CurrencyAPI {
         });
     }
 
-        public static List<Currency> parseJson(String json){
-            Gson gson = new GsonBuilder().create();
-            Currency currency = gson.fromJson(json, Currency.class);
-            return currency.currencies;
-        }
+    public static List<Currency> parseJson(String json){
+        Gson gson = new GsonBuilder().create();
+        Currency currency = gson.fromJson(json, Currency.class);
+        return currency.currencies;
+    }
 }

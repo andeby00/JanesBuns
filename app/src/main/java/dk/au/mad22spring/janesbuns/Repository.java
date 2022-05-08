@@ -55,21 +55,18 @@ public class Repository {
     public void fetchCreamBuns () {
         db.collection("creamBuns")
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<CreamBun> tempCreamBuns = new ArrayList<>();
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<CreamBun> tempCreamBuns = new ArrayList<>();
 
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                tempCreamBuns.add(document.toObject(CreamBun.class));
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-
-                            creamBuns.setValue(tempCreamBuns);
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            tempCreamBuns.add(document.toObject(CreamBun.class));
+                            Log.d(TAG, document.getId() + " => " + document.getData());
                         }
+
+                        creamBuns.setValue(tempCreamBuns);
+                    } else {
+                        Log.w(TAG, "Error getting documents.", task.getException());
                     }
                 });
     }
