@@ -5,9 +5,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.android.volley.RequestQueue;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import dk.au.mad22spring.janesbuns.models.CreamBun;
 import dk.au.mad22spring.janesbuns.models.User;
@@ -18,13 +19,13 @@ public class MainViewModel extends ViewModel {
     MutableLiveData<User> currentUser;
     Repository repo;
 
-    public void initializeVM(LifecycleOwner lifecycleOwner) {
+    public void initializeVM(LifecycleOwner lifecycleOwner, RequestQueue queue) {
         if (creamBuns != null) {
             return;
         }
 
         creamBuns = new MutableLiveData<>(new ArrayList<>());
-        repo = Repository.getInstance();
+        repo = Repository.getInstance(queue);
         repo.getCreamBuns().observe(lifecycleOwner, creamBuns -> this.creamBuns.setValue(creamBuns) );
         repo.getCurrentUser().observe(lifecycleOwner, currentUser -> this.currentUser.setValue(currentUser));
         repo.getCart().observe(lifecycleOwner, cart -> this.cart.setValue(cart));

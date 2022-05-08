@@ -76,13 +76,16 @@
         app:layout_constraintTop_toBottomOf="@+id/postalCodeTextViewProfile"
         tools:text="@string/city" />
 
-    <TextView
+    <Button
         android:id="@+id/txtProfileViewOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/viewOrder"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/cityTextViewProfile"
-        app:layout_constraintTop_toBottomOf="@+id/cityTextViewProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/cityTextViewProfile"
+        app:layout_constraintVertical_bias="0.478" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

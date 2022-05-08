@@ -1,12 +1,9 @@
 package dk.au.mad22spring.janesbuns;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import java.util.Optional;
 
 import dk.au.mad22spring.janesbuns.models.User;
 
@@ -27,5 +24,4 @@ public class ProfileViewModel extends ViewModel {
 
         return currentUser;
     }
-
 }

@@ -15,7 +15,6 @@ import dk.au.mad22spring.janesbuns.fragments.TopbarFragment;
 
 public class OrderActivity extends AppCompatActivity implements OrderAdapter.IOrderItemClickedListener {
 
-
     RecyclerView rcvOrder;
     OrderViewModel vm;
     OrderAdapter orderAdapter;
@@ -42,7 +41,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.IOr
 
     @Override
     public void onOrderClicked(int index) {
-        if(vm.getCurrentUser() != null) {
+        if(vm.getCurrentUser().getValue() != null) {
             if(vm.getCurrentUser().getValue().isAdmin) {
                 startActivity(new Intent(this, AdminOrderDetailsActivity.class));
             } else startActivity(new Intent(this, OrderDetailsActivity.class));

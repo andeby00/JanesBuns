@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -13,6 +12,8 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.toolbox.Volley;
 
 import dk.au.mad22spring.janesbuns.CreamBunAdapter;
 import dk.au.mad22spring.janesbuns.MainViewModel;
@@ -27,12 +28,10 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
     
     RecyclerView rcvCreamBuns;
     FragmentContainerView cartContainter;
-    Button butt;
     CreamBunAdapter creamBunAdapter;
 
     MainViewModel vm;
     ActivityResultLauncher<Intent> launcher;
-    CartFragment cartFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
         setContentView(R.layout.activity_main);
 
         vm = new ViewModelProvider(this).get(MainViewModel.class);
-        vm.initializeVM(this);
+        vm.initializeVM(this, Volley.newRequestQueue(this));
 
         cartContainter = findViewById(R.id.fmcMainCart);
 

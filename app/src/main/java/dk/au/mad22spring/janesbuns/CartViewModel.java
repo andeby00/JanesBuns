@@ -5,12 +5,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import dk.au.mad22spring.janesbuns.models.CreamBun;
-import dk.au.mad22spring.janesbuns.models.Order;
 import dk.au.mad22spring.janesbuns.models.User;
 
 public class CartViewModel extends ViewModel {
@@ -42,11 +40,7 @@ public class CartViewModel extends ViewModel {
         return currentUser;
     }
 
-    public void removeFromCart(int index) {
-        repo.removeFromCart(index);
-    }
+    public void removeFromCart(int index) { repo.removeFromCart(index); }
 
-    public void clearCart() {
-        repo.clearCart();
-    }
+    public void clearCart() { repo.clearCart(); }
 }
