@@ -43,4 +43,8 @@
     <string name="postalCodeError">Postnummer kan ikke være tom</string>
     <string name="viewOrder">Se aktive bestillinger</string>
     <string name="back">Tilbage</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="recieved">Recieved</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="sent">Sent</string>
 </resources>

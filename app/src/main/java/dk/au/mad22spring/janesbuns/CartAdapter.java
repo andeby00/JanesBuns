@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -72,9 +71,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CreamBunViewHo
             super(itemView);
 
             imgImage = itemView.findViewById(R.id.imgCartItemX);
-            txtName = itemView.findViewById(R.id.txtCartItemName);
-            txtAmount = itemView.findViewById(R.id.txtCartItemAmount);
-            txtPrice = itemView.findViewById(R.id.txtCartItemPrice);
+            txtName = itemView.findViewById(R.id.txtOrderDetailsItemName);
+            txtAmount = itemView.findViewById(R.id.txtOrderDetailsItemQuantity);
+            txtPrice = itemView.findViewById(R.id.txtOrderDetailsItemPrice);
             listener = creamBunItemClickedListener;
 
             imgImage.setOnClickListener(view -> onClick(itemView));

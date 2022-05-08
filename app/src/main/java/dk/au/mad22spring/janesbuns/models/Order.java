@@ -37,4 +37,8 @@ public class Order {
         this.status = status;
         this.userUid = userUid;
     }
+
+    public void setStatus(Status status1) {
+        this.status = status1;
+    }
 }

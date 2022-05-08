@@ -41,6 +41,7 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.IOr
         rcvOrder.setLayoutManager(new LinearLayoutManager(this));
         rcvOrder.setAdapter(orderAdapter);
         orderAdapter.updateOrderList(vm.getOrders().getValue());
+        orderAdapter.updateUserOrderList(vm.getCurrentUser().getValue());
 
         vm.getCurrentUser().observe(this, user -> orderAdapter.updateUserOrderList(user));
         if(isAdmin) {
@@ -57,8 +58,14 @@ public class OrderActivity extends AppCompatActivity implements OrderAdapter.IOr
     public void onOrderClicked(int index) {
         if(vm.getCurrentUser().getValue() != null) {
             if(vm.getCurrentUser().getValue().isAdmin) {
-                startActivity(new Intent(this, AdminOrderDetailsActivity.class));
-            } else startActivity(new Intent(this, OrderDetailsActivity.class));
+                Intent i = new Intent(this, AdminOrderDetailsActivity.class);
+                i.putExtra("index", index);
+                startActivity(i);
+            } else {
+                Intent i = new Intent(this, OrderDetailsActivity.class);
+                i.putExtra("index", index);
+                startActivity(i);
+            }
         }
     }
 }

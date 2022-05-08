@@ -42,5 +42,9 @@
     <string name="postalCodeError">Postal code can\'t be empty</string>
     <string name="viewOrder">View active orders</string>
     <string name="back">Back</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="recieved">Recieved</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="sent">Sent</string>
 
 </resources>

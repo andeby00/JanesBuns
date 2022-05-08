@@ -2,8 +2,124 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayoutOrderDetailsAdmin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.AdminOrderDetailsActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fmcOrderDetailsAdminTopbar"
+        android:name="dk.au.mad22spring.janesbuns.fragments.TopbarFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_topbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvOrderDetailsAdminOrders"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtOrderDetailsAdminStatus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fmcOrderDetailsAdminTopbar" />
+
+    <TextView
+        android:id="@+id/txtOrderDetailsAdminStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        tools:text="Status" />
+
+    <TextView
+        android:id="@+id/txtOrderDetailsAdminDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/txtOrderDetailsAdminStatus"
+        app:layout_constraintTop_toBottomOf="@+id/txtOrderDetailsAdminStatus"
+        tools:text="Date" />
+
+    <TextView
+        android:id="@+id/txtOrderDetailsAdminTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/txtOrderDetailsAdminDate"
+        app:layout_constraintTop_toBottomOf="@+id/txtOrderDetailsAdminDate"
+        tools:text="Time" />
+
+    <TextView
+        android:id="@+id/txtOrderDetailsAdminName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtOrderDetailsAdminStatus"
+        app:layout_constraintTop_toBottomOf="@+id/txtOrderDetailsAdminStatus"
+        tools:text="Name" />
+
+    <TextView
+        android:id="@+id/txtOrderDetailsAdminAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/txtOrderDetailsAdminName"
+        app:layout_constraintTop_toBottomOf="@+id/txtOrderDetailsAdminName"
+        tools:text="Address" />
+
+    <Button
+        android:id="@+id/btnOrderDetailsAdminConfirmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:text="@string/confirmed"
+        app:layout_constraintStart_toEndOf="@+id/txtOrderDetailsAdminStatus"
+        app:layout_constraintTop_toTopOf="@+id/txtOrderDetailsAdminStatus" />
+
+    <Button
+        android:id="@+id/btnOrderDetailsAdminRecieved"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/recieved"
+        app:layout_constraintEnd_toEndOf="@+id/btnOrderDetailsAdminConfirmed"
+        app:layout_constraintStart_toStartOf="@+id/btnOrderDetailsAdminConfirmed"
+        app:layout_constraintTop_toBottomOf="@+id/btnOrderDetailsAdminConfirmed" />
+
+    <Button
+        android:id="@+id/btnOrderDetailsAdminCancelled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/cancelled"
+        app:layout_constraintEnd_toEndOf="@+id/btnOrderDetailsAdminRecieved"
+        app:layout_constraintStart_toStartOf="@+id/btnOrderDetailsAdminRecieved"
+        app:layout_constraintTop_toBottomOf="@+id/btnOrderDetailsAdminRecieved" />
+
+    <Button
+        android:id="@+id/btnOrderDetailsAdminSent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/sent"
+        app:layout_constraintEnd_toEndOf="@+id/btnOrderDetailsAdminCancelled"
+        app:layout_constraintStart_toStartOf="@+id/btnOrderDetailsAdminCancelled"
+        app:layout_constraintTop_toBottomOf="@+id/btnOrderDetailsAdminCancelled" />
 </androidx.constraintlayout.widget.ConstraintLayout>
