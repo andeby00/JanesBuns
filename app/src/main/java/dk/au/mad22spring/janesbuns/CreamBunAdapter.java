@@ -21,14 +21,16 @@ import java.util.List;
 import dk.au.mad22spring.janesbuns.models.CreamBun;
 
 public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamBunViewHolder> {
+
     public interface ICreamBunItemClickedListener {
         void onCreamBunClicked(int index);
     }
 
     StorageReference storageRef;
-    private ICreamBunItemClickedListener listener;
-    private List<CreamBun> creamBunList;
-    private Context context;
+    ICreamBunItemClickedListener listener;
+    List<CreamBun> creamBunList;
+    Context context;
+    boolean isAdmin;
 
     public CreamBunAdapter(ICreamBunItemClickedListener listener, Context context) {
         this.listener = listener;
@@ -39,6 +41,7 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
     public void updateCreamBunList(List<CreamBun> list, boolean isAdmin) {
         creamBunList = list;
         if(isAdmin) creamBunList.add(new CreamBun("plus_sign.png"));
+        this.isAdmin = isAdmin;
         notifyDataSetChanged();
     }
 
@@ -85,8 +88,10 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
         @Override
         public void onClick(View view) {
             int i = getBindingAdapterPosition();
-            if(i == creamBunList.size() - 1)
-                listener.onCreamBunClicked(-1);
+
+            if(isAdmin)
+                if(i == creamBunList.size() - 1)
+                    listener.onCreamBunClicked(-1);
 
             listener.onCreamBunClicked(i);
         }

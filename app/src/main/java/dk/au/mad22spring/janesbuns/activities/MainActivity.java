@@ -116,11 +116,12 @@ public class MainActivity extends AppCompatActivity implements CreamBunAdapter.I
     @Override
     public void onCreamBunClicked(int index) {
         Log.d(TAG, "onCreamBunClicked: " + index);
-
-        if (index == -1) {
-            launcher.launch(new Intent(this, AddBunActivity.class));
-        } else {
-            vm.addToCart(index);
+        if (vm.getCurrentUser().getValue() != null) {
+            if (index == -1 && vm.getCurrentUser().getValue().isAdmin) {
+                launcher.launch(new Intent(this, AddBunActivity.class));
+            } else if (!vm.getCurrentUser().getValue().isAdmin){
+                vm.addToCart(index);
+            }
         }
     }
 }
