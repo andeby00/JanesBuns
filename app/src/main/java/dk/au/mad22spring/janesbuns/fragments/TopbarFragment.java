@@ -78,6 +78,7 @@ public class TopbarFragment extends Fragment {
             button.setText(getString(R.string.account));
         }
         if(btnType == "BACK") {
+            button.setText(getString(R.string.back));
             button.setOnClickListener(view -> getActivity().finish());
         }
 
@@ -85,7 +86,9 @@ public class TopbarFragment extends Fragment {
     }
 
     private void onClickOrders(View view) {
-        startActivity(new Intent(getActivity().getApplicationContext(), OrderActivity.class));
+        Intent i = new Intent(getActivity().getApplicationContext(), OrderActivity.class);
+        i.putExtra("isAdmin", true);
+        startActivity(i);
     }
 
     private void onClickAccount(View view) {

@@ -1,5 +1,7 @@
 package dk.au.mad22spring.janesbuns.activities;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -71,6 +73,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void onClickOrder(View view) {
-        startActivity(new Intent(this, OrderActivity.class));
+        Intent i = new Intent(this, OrderActivity.class);
+        i.putExtra("isAdmin", vm.getCurrentUser().getValue().isAdmin);
+        startActivity(i);
     }
 }

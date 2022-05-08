@@ -40,4 +40,5 @@
     <string name="cityError">By kan ikke være tom</string>
     <string name="postalCodeError">Postnummer kan ikke være tom</string>
     <string name="viewOrder">Se aktive bestillinger</string>
+    <string name="back">Tilbage</string>
 </resources>

@@ -1,5 +1,9 @@
 package dk.au.mad22spring.janesbuns;
 
+import static dk.au.mad22spring.janesbuns.Repository.TAG;
+
+import android.util.Log;
+
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -17,14 +21,20 @@ public class OrderViewModel extends ViewModel {
     MutableLiveData<List<Order>> orders;
     MutableLiveData<User> currentUser;
     Repository repo;
+    boolean isAdmin;
 
-    public void initializeVM(LifecycleOwner lifecycleOwner) {
+    public void initializeVM(LifecycleOwner lifecycleOwner, boolean isAdmin) {
+        this.isAdmin = isAdmin;
+
         currentUser = new MutableLiveData<User>();
 
         repo = Repository.getInstance();
-        repo.fetchOrders();
-        repo.getOrders().observe(lifecycleOwner, orders -> this.orders.setValue(orders));
+
         repo.getCurrentUser().observe(lifecycleOwner, currentUser -> this.currentUser.setValue(currentUser));
+        if(isAdmin) {
+            repo.fetchOrders();
+            repo.getOrders().observe(lifecycleOwner, orders -> this.orders.setValue(orders));
+        }
     }
 
     public LiveData<List<Order>> getOrders() {
