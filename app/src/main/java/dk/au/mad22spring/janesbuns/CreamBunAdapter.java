@@ -52,7 +52,6 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
     @Override
     public void onBindViewHolder(@NonNull CreamBunViewHolder holder, int position) {
         holder.txtName.setText(creamBunList.get(position).name);
-        Log.d("TAG", "onBindViewHolder: " + creamBunList.get(position).amount.toString());
         if(creamBunList.get(position).amount > 0) holder.txtAmount.setText(creamBunList.get(position).amount.toString() + " " + context.getString(R.string.quantity));//R.string.txtCreamBunItemQty
         if(creamBunList.get(position).price > 0) holder.txtPrice.setText(creamBunList.get(position).price.toString() + " " + context.getString(R.string.price));
         storageRef.child(creamBunList.get(position).uri).getDownloadUrl().addOnCompleteListener(task -> {

@@ -1,5 +1,6 @@
 package dk.au.mad22spring.janesbuns;
 
+import android.os.Build;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -14,7 +15,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import dk.au.mad22spring.janesbuns.models.CreamBun;
 import dk.au.mad22spring.janesbuns.models.Currencies;
@@ -35,6 +35,8 @@ public class Repository implements CurrencyAPI.IApiCallback {
     MutableLiveData<List<CreamBun>> cart;
     MutableLiveData<List<Order>> orders;
     MutableLiveData<User> currentUser = null;
+    MutableLiveData<List<Currency>> currencies;
+    MutableLiveData<List<String>> currencyCodes;
 
     private Repository(RequestQueue queue) {
         creamBuns = new MutableLiveData<>(new ArrayList<>());
@@ -52,10 +54,31 @@ public class Repository implements CurrencyAPI.IApiCallback {
 
         fetchCreamBuns();
 
-//        api.sendRequest("https://api.currencyapi.com/v3/currencies?apikey=ryw2Tadc8qURWy5QTQ5Kq1zoQAtvh0kpGZqfCGO1&currencies=", queue, this);
+        creamBuns = new MutableLiveData<>(new ArrayList<>());
+        cart = new MutableLiveData<>(new ArrayList<>());
+        orders  = new MutableLiveData<>(new ArrayList<>());
+        currentUser = new MutableLiveData<User>();
+        currencies = new MutableLiveData<>(new ArrayList<>());
+        currencyCodes = new MutableLiveData<>(new ArrayList<>());
+
+        api.sendRequest("https://api.currencyapi.com/v3/latest?apikey=ryw2Tadc8qURWy5QTQ5Kq1zoQAtvh0kpGZqfCGO1&currencies=&base_currency=DKK", queue, this);
     }
 
     public Repository() {
+        creamBuns = new MutableLiveData<>(new ArrayList<>());
+
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        api = new CurrencyAPI();
+
+        String tempUid = null;
+
+        if (mAuth.getCurrentUser() != null) {
+            tempUid = mAuth.getCurrentUser().getUid();
+            updateCurrentUser(tempUid);
+        }
+
+        fetchCreamBuns();
     }
 
     public void fetchCreamBuns() {
@@ -67,9 +90,7 @@ public class Repository implements CurrencyAPI.IApiCallback {
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             tempCreamBuns.add(document.toObject(CreamBun.class));
-                            Log.d(TAG, document.getId() + " => " + document.getData());
                         }
-
                         creamBuns.setValue(tempCreamBuns);
                     } else {
                         Log.w(TAG, "Error getting documents.", task.getException());
@@ -86,7 +107,6 @@ public class Repository implements CurrencyAPI.IApiCallback {
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             tempOrders.add(document.toObject(Order.class));
-                            Log.d(TAG, document.getId() + " => " + document.getData());
                         }
 
                         orders.setValue(tempOrders);
@@ -172,16 +192,38 @@ public class Repository implements CurrencyAPI.IApiCallback {
         api.sendRequest(url, queue, callback);
     }
 
+    public LiveData<List<Currency>> getCurrencies() {
+        if (currencies == null) {
+            currencies = new MutableLiveData<>(new ArrayList<Currency>());
+        }
+
+        return currencies;
+    }
+
+    public LiveData<List<String>> getCurrencyCodes() {
+        if (currencyCodes == null) {
+            currencyCodes = new MutableLiveData<>(new ArrayList<String>());
+        }
+
+        return currencyCodes;
+    }
+
     @Override
     public void apiHandler(String response) {
         Log.d(TAG, "apiHandler: " + response);
         try {
             Currencies result = new ObjectMapper().readValue(response, Currencies.class);
 
-            for (Map.Entry<String, Currency> entry : result.data.entrySet()) {
-                String key = entry.getKey();
-                Currency currency = entry.getValue();
+            List<Currency> tempCurrencies = new ArrayList<>(result.data.values());
+            currencies.setValue(tempCurrencies);
+
+            List<String> tempList = new ArrayList<>();
+            if(getCurrencies().getValue() != null) {
+                for (Currency currency : getCurrencies().getValue()) {
+                    tempList.add(currency.code + ": " + currency.value);
+                }
             }
+            currencyCodes.setValue(tempList);
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();

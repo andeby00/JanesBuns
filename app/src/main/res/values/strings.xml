@@ -46,5 +46,6 @@
     <string name="recieved">Recieved</string>
     <string name="cancelled">Cancelled</string>
     <string name="sent">Sent</string>
+    <string name="current_currency">Current currency</string>
 
 </resources>
