@@ -40,7 +40,8 @@ public class CreamBunAdapter extends RecyclerView.Adapter<CreamBunAdapter.CreamB
 
     public void updateCreamBunList(List<CreamBun> list, boolean isAdmin) {
         creamBunList = list;
-        if(isAdmin) creamBunList.add(new CreamBun("plus_sign.png"));
+        if(isAdmin && creamBunList.size() > 0 && !creamBunList.get(creamBunList.size() - 1).uri.equals("plus_sign.png"))
+            creamBunList.add(new CreamBun("plus_sign.png"));
         this.isAdmin = isAdmin;
         notifyDataSetChanged();
     }
